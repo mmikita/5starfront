@@ -1,8 +1,8 @@
 import React from 'react'
-import { FaBars, FaClose } from 'react-icons/lib/fa'
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 const SidebarIcon = ({handleClick, isOpen}) => {
   return <span onClick={handleClick}>
-    {isOpen ? <FaClose /> : <FaBars/>}
+    {isOpen ? <FaArrowLeft /> : <FaArrowRight/>}
   </span>
 }
 export default SidebarIcon

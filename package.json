@@ -5,6 +5,9 @@
   "dependencies": {
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
+    "react-fa": "^5.0.0",
+    "react-global-configuration": "^1.4.0",
+    "react-icons": "^3.8.0",
     "react-scripts": "3.2.0"
   },
   "scripts": {
@@ -27,5 +30,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.0",
+    "@babel/preset-env": "^7.7.1",
+    "@fortawesome/fontawesome-free": "^5.11.2",
+    "eslint": "^6.6.0",
+    "webpack": "^4.41.0"
   }
 }

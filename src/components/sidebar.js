@@ -2,34 +2,83 @@ import React, { Component } from 'react'
 import SidebarIcon from './SidebarIcon'
 export default class Sidebar extends Component {
   state = {
-     isOpen: true
-   }
- 
-   renderSidebar = () => {
-     if (!this.state.isOpen) {
-       return null
-     }
- 
-     return <div className="sidebar">
-       <div className="sidebar-link">Home</div>
-       <div className="sidebar-link">About</div>
-       <div className="sidebar-link">Contact</div>
+    isOpen: true
+  }
+
+  renderSidebar = () => {
+    if (!this.state.isOpen) {
+      return null
+    }
+
+    return <div className="sidebar">
+      <form>
+        <input
+          placeholder="Wyszukaj projekt... "
+        />
+        <p>Status:</p>
+
+        <ul>
+          <li>
+            <label>
+              <input
+                name="status"
+                type="radio"
+
+              /*
+              checked={this.state.size === "small"}
+              onChange={this.handleChange}*/
+              />
+              Wszystkie
+          </label>
+          </li>
+
+          <li>
+            <label>
+              <input
+                name="status"
+                type="radio"
+                checked="checked"
+
+              />
+              W trakcie
+          </label>
+          </li>
+
+          <li>
+            <label>
+              <input
+                name="status"
+                type="radio"
+              /* value="large" */
+              />
+              Zakończone
+          </label>
+          </li>
+        </ul>
+        <div>
+          <p>Sortuj po...</p>
+          <select name="cars">
+            <option value="date">dacie dodania</option>
+            <option value="name">nazwie</option>
+          </select>
+        </div>
+      </form>
     </div>
   }
-toggleSidebar = () => {
+  toggleSidebar = () => {
     this.setState(prevState => ({
       isOpen: !prevState.isOpen
     }))
   }
-render() {
+  render() {
     return <div className="sidebar-container">
-      {this.renderSidebar()}
       <div className="sidebar-icon">
         <SidebarIcon
           isOpen={this.state.isOpen}
           handleClick={this.toggleSidebar}
         />
       </div>
+      {this.renderSidebar()}
     </div>
   }
 }

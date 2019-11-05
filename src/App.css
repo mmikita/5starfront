@@ -52,3 +52,25 @@ background-color: gainsboro;
   min-height: 100vh;
   background-color: lightgray;
 }
+
+div.sidebar-icon{
+margin-top: 10px;
+}
+ 
+  ul{
+    list-style-type: none;
+  }
+  li{
+    float: left;
+  }
+  form > div{
+    display: inline-block;
+  }
+  select{
+    display: block;
+  margin: 0 auto;
+  color: black;
+  }
+  div.user-wrapper > form > div > p{
+    text-align: center;
+  }
