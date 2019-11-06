@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import CourseDataService from '../service/CourseDataService.js';
+import Main from '../components/main.jsx';
+
 
 const INSTRUCTOR = 'in28minutes'
 
@@ -30,30 +32,7 @@ class ListCoursesComponent extends Component {
     render() {
         console.log('render')
         return (
-            <div className="container">
-                <h3>All Courses</h3>
-                <div className="container">
-                    <table className="table">
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                this.state.courses.map(
-                                    course =>
-                                        <tr key={course.id}>
-                                            <td>{course.id}</td>
-                                            <td>{course.description}</td>
-                                        </tr>
-                                )
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+        <Main/ >
         )
     }
 }
