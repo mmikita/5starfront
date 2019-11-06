@@ -37,8 +37,6 @@ export default class Sidebar extends Component {
               <input
                 name="status"
                 type="radio"
-                checked="checked"
-
               />
               W trakcie
           </label>
