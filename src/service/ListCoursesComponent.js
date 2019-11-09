@@ -20,12 +20,12 @@ class ListCoursesComponent extends Component {
     }
 
     refreshCourses() {
-        CourseDataService.retrieveAllCourses(INSTRUCTOR)//HARDCODED
-            .then(
-                response => {
-                    this.setState({ courses: response.data })
-                }
-            )
+        // CourseDataService.retrieveAllCourses(INSTRUCTOR)//HARDCODED
+        //     .then(
+        //         response => {
+        //             this.setState({ courses: response.data })
+        //         }
+        //     )
     }
 
 
