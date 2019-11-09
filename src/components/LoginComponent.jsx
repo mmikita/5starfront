@@ -29,7 +29,22 @@ class LoginComponent extends Component {
     loginClicked() {
         if(this.state.username==='in28minutes' && this.state.password==='dummy'){
             AuthenticationService.registerSuccessfulLogin(this.state.username,this.state.password)
-            this.props.history.push(`/courses`)
+
+            // const { history, location } = this.props;
+            // if (location.pathname === '/courses') {
+            //   history.replace(`/reload`);
+            //   setTimeout(() => {
+            //     history.replace(`/5starflow`);
+            //   });
+            // } else {
+            //   history.push('/5starflow');
+            // }
+
+
+
+
+            this.props.history.push(`/5starflow`)
+
             this.setState({showSuccessMessage:true})
             this.setState({hasLoginFailed:false})
         }
