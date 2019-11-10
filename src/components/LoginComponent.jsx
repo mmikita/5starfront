@@ -27,9 +27,15 @@ class LoginComponent extends Component {
     }
 
     loginClicked() {
-        if(this.state.username==='in28minutes' && this.state.password==='dummy'){
-            AuthenticationService.registerSuccessfulLogin(this.state.username,this.state.password)
-
+        // if(this.state.username==='in28minutes' && this.state.password==='dummy'){
+            AuthenticationService.executeJwtAuthenticationService(this.state.username, this.state.password)
+            .then((response) => {
+                AuthenticationService.registerSuccessfulLoginForJwt(this.state.username, response.data.token)
+                this.props.history.push(`/5starflow`)
+            }).catch(() => {
+                this.setState({ showSuccessMessage: false })
+                this.setState({ hasLoginFailed: true })
+            })
             // const { history, location } = this.props;
             // if (location.pathname === '/courses') {
             //   history.replace(`/reload`);
@@ -39,19 +45,14 @@ class LoginComponent extends Component {
             // } else {
             //   history.push('/5starflow');
             // }
-
-
-
-
-            this.props.history.push(`/5starflow`)
-
-            this.setState({showSuccessMessage:true})
-            this.setState({hasLoginFailed:false})
-        }
-        else {
-             this.setState({showSuccessMessage:false})
-             this.setState({hasLoginFailed:true})
-        }
+            // this.props.history.push(`/5starflow`)
+            // this.setState({showSuccessMessage:true})
+            // this.setState({hasLoginFailed:false})
+        // }
+        // else {
+        //      this.setState({showSuccessMessage:false})
+        //      this.setState({hasLoginFailed:true})
+        // }
     }
 
     render() {
