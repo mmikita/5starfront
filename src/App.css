@@ -71,3 +71,11 @@ ul{
 text-align: end;
 padding-right: 10px;
   }
+
+.register{
+position: absolute;
+bottom: 0;
+right: 0;
+padding: 5px;
+
+}

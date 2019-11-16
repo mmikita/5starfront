@@ -41,4 +41,11 @@ body {
     margin:0;
   }
 
-  
+.form-field{
+padding: 5px 0;
+
+}
+label{
+padding-right: 5px;
+
+}

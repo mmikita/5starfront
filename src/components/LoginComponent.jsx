@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import AuthenticationService from '../service/AuthenticationService';
 import '../css/Login.css';
+import { Link, withRouter } from 'react-router-dom'
 
 
 class LoginComponent extends Component {
@@ -61,42 +62,33 @@ class LoginComponent extends Component {
         return (
             <div className="loginContainer">
 
-            <div className="login">
-                <div className="logo">Agent Q Dashboard</div>
-                <div>
-                    {this.state.hasLoginFailed && <div className="alert alert-warning">Nieprawidłowe dane</div>}
-                    {this.state.showSuccessMessage && <div>Zalogowany</div>}
+                <div className="login">
+                    <div className="logo">Klikaj 5stary</div>
+                    <div>
+                        {this.state.hasLoginFailed && <div className="alert alert-warning">Nieprawidłowe dane</div>}
+                        {this.state.showSuccessMessage && <div>Zalogowany</div>}
+                        <div className="form-field">
 
-                    <div className="form-field">
-
-                        <label className="user" htmlFor="login-username"><span className="hidden">Username</span></label>
-                        <input id="login-username" type="text" className="form-input" placeholder="Username" name="username" value={this.state.username} onChange={this.handleChange} required />
-                    </div>
-
-
-
-
-                    <div className="form-field">
-                        <label className="lock" htmlFor="login-password"><span className="hidden">Password</span></label>
-                        <input id="login-password" type="password" className="form-input" placeholder="Password" name="password" value={this.state.password} onChange={this.handleChange} required />
-
+                            <label className="user" htmlFor="login-username"><span className="hidden">Login</span></label>
+                            <input id="login-username" type="text" className="form-input" placeholder="Login" name="username" value={this.state.username} onChange={this.handleChange} required />
+                        </div>
+                        <div className="form-field">
+                            <label className="lock" htmlFor="login-password"><span className="hidden">Hasło</span></label>
+                            <input id="login-password" type="password" className="form-input" placeholder="Hasło" name="password" value={this.state.password} onChange={this.handleChange} required />
+                        </div>
+                        <div className="row form-field">
+                            <button className="btn btn-success" onClick={this.loginClicked}>Zaloguj</button>
+                        </div>
 
                     </div>
-
-
-
-
-
-
-
-
-                    <div className="form-field">
-                        <button className="btn btn-success" onClick={this.loginClicked}>Login</button>
-                    </div>
-
                 </div>
+                    <div className="register">
+                        <Link className="nav-link" to="/logout" onClick={AuthenticationService.logout}>Załóż konto</Link>
+                    </div>
+               
             </div>
-             </div>
+
+
         )
     }
 }
