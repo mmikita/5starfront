@@ -7,6 +7,7 @@ import LogoutComponent from './components/LogoutComponent';
 import MenuComponent from './components/MenuComponent';
 import AuthenticatedRoute from './service/AuthenticatedRoute';
 import './App.css';
+const API_URL = 'http://localhost:8080'
 
 
 class InstructorApp extends Component {

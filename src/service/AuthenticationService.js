@@ -1,6 +1,7 @@
 import axios from 'axios'
+import '../global.js'
 
-const API_URL = 'http://localhost:8080'
+const API_URL = global.apiUrl
 
 export const USER_NAME_SESSION_ATTRIBUTE_NAME = 'authenticatedUser'
 
