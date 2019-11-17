@@ -4,7 +4,7 @@ import '../css/Login.css';
 import { Link, withRouter } from 'react-router-dom'
 
 
-class LoginComponent extends Component {
+class RegisterComponent extends Component {
 
     constructor(props) {
         super(props)
@@ -76,14 +76,23 @@ class LoginComponent extends Component {
                             <label className="lock" htmlFor="login-password"><span className="hidden">Hasło</span></label>
                             <input id="login-password" type="password" className="form-input" placeholder="Hasło" name="password" value={this.state.password} onChange={this.handleChange} required />
                         </div>
+                        <div className="form-field">
+                            <label className="lock" htmlFor="login-password"><span className="hidden">Powtórz hasło</span></label>
+                            <input id="login-password" type="password" className="form-input" placeholder="Powtórz hasło" name="password" value={this.state.password} onChange={this.handleChange} required />
+                        </div>
+                               <div className="form-field">
+                            <label className="lock" htmlFor="login-password"><span className="hidden">Tajne hasło</span></label>
+                            <input id="login-password" type="password" className="form-input" placeholder="Tajne hasło" name="password" value={this.state.password} onChange={this.handleChange} required />
+                        </div>
+
                         <div className="row form-field">
-                            <button className="btn btn-success" onClick={this.loginClicked}>Zaloguj</button>
+                            <button className="btn btn-success" onClick={this.loginClicked}>Rejestracja</button>
                         </div>
 
                     </div>
                 </div>
                     <div className="register">
-                        <Link className="nav-link" to="/register" onClick={AuthenticationService.logout}>Załóż konto</Link>
+                        <Link className="nav-link" to="/" onClick={AuthenticationService.logout}>Zaloguj sie</Link>
                     </div>
                
             </div>
@@ -93,4 +102,4 @@ class LoginComponent extends Component {
     }
 }
 
-export default LoginComponent
+export default RegisterComponent
