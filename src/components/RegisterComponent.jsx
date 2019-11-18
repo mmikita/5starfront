@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import AuthenticationService from '../service/AuthenticationService';
 import '../css/Login.css';
-import { Link, withRouter } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import axios from 'axios';
 import '../global.js'
 
@@ -24,6 +24,8 @@ class RegisterComponent extends Component {
 
         this.handleChange = this.handleChange.bind(this)
         this.registerClicked = this.registerClicked.bind(this)
+        this.setRegisterError = this.setRegisterError.bind(this)
+
     }
 
     handleChange(event) {
@@ -34,27 +36,34 @@ class RegisterComponent extends Component {
             }
         )
     }
-
-    registerClicked() {
-      console.log("haslo "+ this.state.password + " powtrz " +this.state.repeatPassword);
- if(this.state.password !== this.state.repeatPassword){
+setRegisterError(){
     this.setState({ hasRegisterFailed: true })
 }
+    registerClicked() {
+ if(this.state.password !== this.state.repeatPassword){
+    this.setRegisterError();
+}
  else{
-    this.sendRegister(this.state.username, this.state.password);
-
-
+ this.sendRegister(this.state.username, this.state.password, this.state.hiddenPassword);
  }
 
     }
 
 
-    sendRegister(username, password) {
-        console.log(username);
+    sendRegister(username, password, hiddenPassword) {
         return axios.post(`${API_URL}/register`, {
             username,
-            password
-        })
+            password,
+            hiddenPassword
+        }).then(res => {
+            console.log(res.data);
+            if(res.data === false){
+                this.setRegisterError();
+            }
+            else{
+                this.props.history.push(`/`)   
+            }
+          })
     }
 
     render() {

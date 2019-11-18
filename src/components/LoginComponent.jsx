@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import AuthenticationService from '../service/AuthenticationService';
 import '../css/Login.css';
-import { Link, withRouter } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 
 class LoginComponent extends Component {
