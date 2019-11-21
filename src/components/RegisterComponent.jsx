@@ -65,7 +65,12 @@ setRegisterError(){
             }
           })
     }
-
+    enterPressed(event) {
+        var code = event.keyCode || event.which;
+        if(code === 13) { //13 is the enter keycode
+            this.registerClicked();
+        } 
+    }
     render() {
         return (
             <div className="loginContainer">
@@ -90,7 +95,8 @@ setRegisterError(){
                         </div>
                                <div className="form-field">
                             <label className="lock" htmlFor="login-hiddenPassword"><span className="hidden">Tajne hasło</span></label>
-                            <input id="login-hiddenPassword" type="password" className="form-input" placeholder="Tajne hasło" name="hiddenPassword" value={this.state.hiddenPassword} onChange={this.handleChange} required />
+                            <input id="login-hiddenPassword" type="password" className="form-input" placeholder="Tajne hasło" name="hiddenPassword" value={this.state.hiddenPassword} 
+                            onChange={this.handleChange}  onKeyPress={this.enterPressed.bind(this)} required />
                         </div>
 
                         <div className="row form-field">

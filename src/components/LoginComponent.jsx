@@ -58,6 +58,13 @@ class LoginComponent extends Component {
         // }
     }
 
+    enterPressed(event) {
+        var code = event.keyCode || event.which;
+        if(code === 13) { //13 is the enter keycode
+            this.loginClicked();
+        } 
+    }
+
     render() {
         return (
             <div className="loginContainer">
@@ -74,7 +81,7 @@ class LoginComponent extends Component {
                         </div>
                         <div className="form-field">
                             <label className="lock" htmlFor="login-password"><span className="hidden">Hasło</span></label>
-                            <input id="login-password" type="password" className="form-input" placeholder="Hasło" name="password" value={this.state.password} onChange={this.handleChange} required />
+                            <input id="login-password" type="password" className="form-input" placeholder="Hasło" name="password" value={this.state.password} onChange={this.handleChange} onKeyPress={this.enterPressed.bind(this)} required />
                         </div>
                         <div className="row form-field">
                             <button className="btn btn-success" onClick={this.loginClicked}>Zaloguj</button>
