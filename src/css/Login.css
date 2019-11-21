@@ -25,9 +25,17 @@ header{
   width: 100%;
   background:rgba(58,63,68,0.5);
   align-items:center;
-  padding-left: 10px;
+  padding: 5px;
 
 
+}
+.loginPanel{
+  background:
+  #222222;
+  
+  padding: 10px;
+  
+  border-radius: 10px;
 }
 
 .separator{
@@ -36,11 +44,12 @@ header{
 
 
 .login{
-    
       border-radius: 5px;
       box-shadow: 0 1.5px 0 0 rgba(0,0,0,0.1);
       padding-right: 10px;
-
+}
+.login>a{
+  padding-right: 10px;
 }
 
 .star5{

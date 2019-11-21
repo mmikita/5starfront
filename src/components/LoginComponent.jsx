@@ -69,7 +69,7 @@ class LoginComponent extends Component {
         return (
             <div className="loginContainer">
 
-                <div className="login">
+                <div className="loginPanel">
                     <div className="logo">Klikaj 5stary</div>
                     <div>
                         {this.state.hasLoginFailed && <div className="alert alert-warning">Nieprawidłowe dane</div>}
