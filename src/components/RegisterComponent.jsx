@@ -75,7 +75,7 @@ setRegisterError(){
         return (
             <div className="loginContainer">
 
-                <div className="login">
+                <div className="loginPanel">
                     <div className="logo">Klikaj 5stary</div>
                     <div>
                         {this.state.hasRegisterFailed && <div className="alert alert-warning">Nieprawidłowe dane</div>}
@@ -99,7 +99,7 @@ setRegisterError(){
                             onChange={this.handleChange}  onKeyPress={this.enterPressed.bind(this)} required />
                         </div>
 
-                        <div className="row form-field">
+                        <div className="row form-field button">
                             <button className="btn btn-success" onClick={this.registerClicked}>Rejestracja</button>
                         </div>
 
