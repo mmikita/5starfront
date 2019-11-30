@@ -10,10 +10,6 @@ export default class Main extends Component {
     return (
       <div className="app">
         <MenuComponent />
-        <div className="content">
-          <Sidebar />
-          <Content />
-        </div>
       </div>
     );
   }

@@ -7,14 +7,9 @@ import Sidebar from './sidebar'
 import Content from './content.jsx'
 const API_URL = global.apiUrl
 
-
-
 class MenuComponent extends Component {
-
-   
     constructor(props) {
         super(props)
-
         this.state = {
             star5Project: []
         }
@@ -29,25 +24,18 @@ class MenuComponent extends Component {
             }
         )
     }
-
     addNewProject(event) {
         console.log("-----");
-
         return axios.post(`${API_URL}/createNew5star`).then(res => {
             console.log(res.data);
             this.setState({ star5Project: JSON.stringify(res.data)  })
-
-
         })
     }
-
     render() {
         const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
-
         return (
             <React.Fragment>
                 <header>
-
                     <div onClick={this.addNewProject} className="star5">
                         {isUserLoggedIn && <UseAnimations animationKey="star" size={32} style={{ padding: 0 }} />}
                     </div>
@@ -61,12 +49,8 @@ class MenuComponent extends Component {
                     <Content start5={this.state.star5Project} />
                 </div>
             </React.Fragment>
-
-
         )
-
     }
-
 }
 
 export default withRouter(MenuComponent)
