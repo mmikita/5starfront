@@ -2,13 +2,14 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:400,300,700);
 
 html {
-   height: 100%;
+   height: 100vh;
 }
 
 
 
 body {
     /* Remember to use the other versions for IE 10 and older browsers! */
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
