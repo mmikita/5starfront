@@ -19,6 +19,11 @@ export default class Content extends Component {
     )
   }
   render() {
+    let projectName;
+    if (this.props.start5.length !== 0 ) {
+      console.log(this.props.start5)
+      projectName = <ProjectForm/>;
+    }
 
 
     const elements = [];
@@ -28,22 +33,35 @@ export default class Content extends Component {
       <img className={this.props.logo} src={logo} alt="Logo" />
 
       <div className="project">
-      {this.props.start5.map((status) => {
+
+
+        {projectName}
+        {this.props.start5.map((status) => {
           return <div key={status.name} className="toDoLi">
             <span>{status.name}</span>
             <span>i</span>
             <span>...</span>
             <span>ok</span>
 
-
           </div>
 
 
         })}
 
-        
+
       </div>
     </div>
 
   }
+}
+
+function ProjectForm(props) {
+  return (
+    <div className="projectData">
+      <form>
+        <input /><input />
+      </form>
+
+    </div>
+  );
 }

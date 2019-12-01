@@ -39,30 +39,13 @@ class LoginComponent extends Component {
                 this.setState({ showSuccessMessage: false })
                 this.setState({ hasLoginFailed: true })
             })
-        // const { history, location } = this.props;
-        // if (location.pathname === '/courses') {
-        //   history.replace(`/reload`);
-        //   setTimeout(() => {
-        //     history.replace(`/5starflow`);
-        //   });
-        // } else {
-        //   history.push('/5starflow');
-        // }
-        // this.props.history.push(`/5starflow`)
-        // this.setState({showSuccessMessage:true})
-        // this.setState({hasLoginFailed:false})
-        // }
-        // else {
-        //      this.setState({showSuccessMessage:false})
-        //      this.setState({hasLoginFailed:true})
-        // }
     }
 
     enterPressed(event) {
         var code = event.keyCode || event.which;
-        if(code === 13) { //13 is the enter keycode
+        if (code === 13) { //13 is the enter keycode
             this.loginClicked();
-        } 
+        }
     }
 
     render() {
@@ -89,10 +72,10 @@ class LoginComponent extends Component {
 
                     </div>
                 </div>
-                    <div className="register">
-                        <Link className="nav-link" to="/register" onClick={AuthenticationService.logout}>Załóż konto</Link>
-                    </div>
-               
+                <div className="register">
+                    <Link className="nav-link" to="/register" onClick={AuthenticationService.logout}>Załóż konto</Link>
+                </div>
+
             </div>
 
 
