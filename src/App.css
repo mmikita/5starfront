@@ -1,4 +1,6 @@
 
+@import url('https://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css');
+@import url(https://fonts.googleapis.com/css?family=Lato:400,300,700);
 .app {
   text-align: center;
 display: block;
@@ -24,6 +26,8 @@ display: block;
 #222222;
 padding: 10px;
 border-radius: 10px;
+width: 250px;
+margin: 0 auto;
 }
 .loginPanel input {
   display: inline-block;
@@ -37,8 +41,18 @@ border-radius: 10px;
 }
 .loginPanel .button{
 text-align: right;
-
 }
+
+#root{
+width: 100%;
+}
+.content-container{
+  margin: 0 auto;
+}
+.logoimgwith5star{
+  width: 20%;
+}
+
 .App-link {
   color: #09d3ac;
 }
@@ -105,12 +119,6 @@ right: 0;
 padding: 5px;
 
 }
-
-
-
-@import url('https://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css');
-@import url(https://fonts.googleapis.com/css?family=Lato:400,300,700);
-
 
 
 .separator{

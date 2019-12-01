@@ -22,8 +22,12 @@ handleChange(event) {
     return <div
       className="content-container"
     >
-{this.props.start5===!null ? "" : <div><img className="logoimg" src={logo} alt="Logo" /></div>}
-{this.props.start5}
+
+<img class={this.props.logo} src={logo} alt="Logo" />
+
+<div className="project">{this.props.start5}</div>
+
+
     </div>
   }
 }

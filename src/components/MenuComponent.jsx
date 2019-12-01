@@ -5,13 +5,16 @@ import UseAnimations from 'react-useanimations';
 import axios from 'axios';
 import Sidebar from './sidebar'
 import Content from './content.jsx'
+import logo from  '../resources/img/5StarWeb_logo.png'
+
 const API_URL = global.apiUrl
 
 class MenuComponent extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            star5Project: []
+            star5Project: [],
+            logoImage: 'logoimg'
         }
         this.addNewProject = this.addNewProject.bind(this)
 
@@ -28,7 +31,11 @@ class MenuComponent extends Component {
         console.log("-----");
         return axios.post(`${API_URL}/createNew5star`).then(res => {
             console.log(res.data);
-            this.setState({ star5Project: JSON.stringify(res.data)  })
+            this.setState({ star5Project: JSON.stringify(res.data)  });
+            this.setState({ logoImage: 'logoimgwith5star' });
+            
+
+
         })
     }
     render() {
@@ -46,7 +53,7 @@ class MenuComponent extends Component {
                 </header>
                 <div className="content">
                     <Sidebar />
-                    <Content start5={this.state.star5Project} />
+                    <Content start5={this.state.star5Project} logo={this.state.logoImage} />
                 </div>
             </React.Fragment>
         )
