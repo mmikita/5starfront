@@ -51,13 +51,58 @@ height: 100%;
   margin: 0 auto;
 }
 .logoimgwith5star{
-  width: 4%;
+  width: 20%;
 }
 .project{
   margin: 0 auto;
   height: 100vh;  width: 100%;
   overflow: auto;
+  background-color: #394f5a;
 }
+
+
+.toDoLi{
+background-color: green;
+margin-top: 5px;
+margin-bottom: 5px;
+padding-top: 3px;
+padding-bottom: 3px;
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .App-link {
   color: #09d3ac;

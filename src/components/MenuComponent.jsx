@@ -30,11 +30,11 @@ class MenuComponent extends Component {
     addNewProject(event) {
         console.log("-----");
         return axios.post(`${API_URL}/createNew5star`).then(res => {
-            console.log(res.data);
-            this.setState({ star5Project: JSON.stringify(res.data)  });
             this.setState({ logoImage: 'logoimgwith5star' });
-            
+             var elements = res.data.statues;
+             console.log(elements);
 
+              this.setState({ star5Project: elements  });
 
         })
     }

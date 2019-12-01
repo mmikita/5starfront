@@ -19,18 +19,29 @@ export default class Content extends Component {
     )
   }
   render() {
-    const elements = [this.props.start5, this.props.start5, this.props.start5, this.props.start5, this.props.start5, this.props.start5, this.props.start5, this.props.start5, this.props.start5, this.props.start5, this.props.start5, this.props.start5, this.props.start5];
+
+
+    const elements = [];
 
     return <div
       className="content-container">
-      <img class={this.props.logo} src={logo} alt="Logo" />
+      <img className={this.props.logo} src={logo} alt="Logo" />
 
       <div className="project">
-        <ul>
-          {elements.map((value, index) => {
-            return <li key={index}>{value}</li>
-          })}
-        </ul>
+      {this.props.start5.map((status) => {
+          return <div key={status.name} className="toDoLi">
+            <span>{status.name}</span>
+            <span>i</span>
+            <span>...</span>
+            <span>ok</span>
+
+
+          </div>
+
+
+        })}
+
+        
       </div>
     </div>
 
