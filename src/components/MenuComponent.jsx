@@ -27,7 +27,6 @@ class MenuComponent extends Component {
         )
     }
     addNewProject(event) {
-        console.log("-----");
         return axios.post(`${API_URL}/createNew5star`).then(res => {
             this.setState({ logoImage: 'logoimgwith5star' });
              var elements = res.data.statues;
