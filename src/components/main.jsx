@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import Sidebar from './sidebar'
-import Content from './content'
+
 import MenuComponent from './MenuComponent';
 
 

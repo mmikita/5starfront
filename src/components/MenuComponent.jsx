@@ -5,7 +5,6 @@ import UseAnimations from 'react-useanimations';
 import axios from 'axios';
 import Sidebar from './sidebar'
 import Content from './content.jsx'
-import logo from  '../resources/img/5StarWeb_logo.png'
 
 const API_URL = global.apiUrl
 
