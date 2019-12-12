@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import MenuComponent from './MenuComponent';
+import ProjectComponent from './ProjectComponent';
 
 
 
@@ -8,7 +8,7 @@ export default class Main extends Component {
   render() {
     return (
       <div className="app">
-        <MenuComponent />
+        <ProjectComponent />
       </div>
     );
   }

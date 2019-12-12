@@ -91,7 +91,7 @@ if($('#save').text()==="Zapisz"){
   $('#contractId').prop("disabled", true);
   $('#save').text('Edytuj');
   $("#statuesList").removeClass("disableStatues");
-  saveProject(); 
+  saveProject( $('#name').text(), $('#contractId').text(),$('#URL').text()); 
 }
 
 else{

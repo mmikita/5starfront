@@ -8,20 +8,24 @@ import Content from './content.jsx'
 
 const API_URL = global.apiUrl
 
-class MenuComponent extends Component {
+class ProjectComponent extends Component {
     constructor(props) {
         super(props)
         this.state = {
             star5Project: [],
-            logoImage: 'logoimg'
+            logoImage: 'logoimg',
+            uuid: '',
+            name: '',
+            contractId: '',
+            URL: ''
         }
         this.addNewProject = this.addNewProject.bind(this)
         this.createOrEditProject = this.createOrEditProject.bind(this)
 
 
     }
-    createOrEditProject(){
-        console.log("jestem w ----------------------------------------------");
+    createOrEditProject(name, number, url){
+        console.log(name +" " + number + url);
             }
     handleChange(event) {
         this.setState(
@@ -33,10 +37,9 @@ class MenuComponent extends Component {
     }
     addNewProject(event) {
         return axios.post(`${API_URL}/createNew5star`).then(res => {
-            this.setState({ logoImage: 'logoimgwith5star' });
-             var elements = res.data.statues;
-
-              this.setState({ star5Project: elements  });
+        this.setState({ logoImage: 'logoimgwith5star' });
+        this.setState({ uuid: res.data.uuid  });
+        this.setState({ star5Project: res.data.statues  });
 
         })
     }
@@ -63,4 +66,4 @@ class MenuComponent extends Component {
   
 }
 
-export default withRouter(MenuComponent)
+export default withRouter(ProjectComponent)
