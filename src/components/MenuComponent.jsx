@@ -16,8 +16,13 @@ class MenuComponent extends Component {
             logoImage: 'logoimg'
         }
         this.addNewProject = this.addNewProject.bind(this)
+        this.createOrEditProject = this.createOrEditProject.bind(this)
+
 
     }
+    createOrEditProject(){
+        console.log("jestem w ----------------------------------------------");
+            }
     handleChange(event) {
         this.setState(
             {
@@ -30,7 +35,6 @@ class MenuComponent extends Component {
         return axios.post(`${API_URL}/createNew5star`).then(res => {
             this.setState({ logoImage: 'logoimgwith5star' });
              var elements = res.data.statues;
-             console.log(elements);
 
               this.setState({ star5Project: elements  });
 
@@ -51,11 +55,12 @@ class MenuComponent extends Component {
                 </header>
                 <div className="content">
                     <Sidebar />
-                    <Content start5={this.state.star5Project} logo={this.state.logoImage} />
+                    <Content start5={this.state.star5Project} logo={this.state.logoImage} saveProject={this.createOrEditProject} />
                 </div>
             </React.Fragment>
         )
     }
+  
 }
 
 export default withRouter(MenuComponent)

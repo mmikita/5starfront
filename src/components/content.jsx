@@ -4,16 +4,15 @@ import { useState } from 'react';
 import $ from 'jquery'; 
 export default class Content extends Component {
 
-
   constructor(props) {
+    
     super(props)
     this.state = {
       blankContent: "",
       projectName: "",
       projectUrl: "",
-      contractId: ""
-
-
+      contractId: "",
+      saveProject: props.saveProject
     }
   }
   handleChange(event) {
@@ -26,40 +25,35 @@ export default class Content extends Component {
   }
   render() {
     let projectName;
-    let saveEditButton = <saveEditbutton />;
+  
 
     if (this.props.start5.length !== 0) {
-      console.log(this.props.start5)
-      projectName = <ProjectForm />;
+      projectName = <ProjectForm saveProject={this.state.saveProject} />;
     }
     return <div
       className="content-container">
       <img className={this.props.logo} src={logo} alt="Logo" />
       <div className="project">
         {projectName}
+        <div id= "statuesList" className="disableStatues">
         {this.props.start5.map((status) => {
           return <div key={status.name} className="toDoLi">
             <span>{status.name}</span>
             <span>i</span>
             <span>...</span>
-            <span>ok</span>
+            <button>ok</button>
           </div>
         })}
+      </div>
       </div>
     </div>
   }
 }
 
 function ProjectForm(props) {
-
   const [projectName, setProjectName] = useState('');
   const [projectUrl, setProjectUrl] = useState('');
   const [contractId, setContractId] = useState('');
-
-
-
-
-
   return (
     <div className="projectData">
       <div>
@@ -76,8 +70,7 @@ function ProjectForm(props) {
           </div>
 
           <div className="saveEditbutton">
-            <a href="#" id="save" onClick={() => updateInputValue(projectName, projectUrl, contractId)}>Zapisz</a>
-          </div>
+          <a href="#" id="save" onClick={() => updateInputValue(projectName, projectUrl, contractId, props.saveProject)}>Zapisz</a>          </div>
 
         </form>
       </div>
@@ -87,7 +80,7 @@ function ProjectForm(props) {
 
 }
 
-function updateInputValue(name, number, url) {
+function updateInputValue(name, number, url, saveProject) {
   console.log(name);
   console.log(number);
   console.log($('#save').text());
@@ -97,25 +90,18 @@ if($('#save').text()==="Zapisz"){
   $('#URL').prop("disabled", true);
   $('#contractId').prop("disabled", true);
   $('#save').text('Edytuj');
-
+  $("#statuesList").removeClass("disableStatues");
+  saveProject(); 
 }
+
 else{
   $('#save').text('Zapisz');
   $('#name').prop("disabled", false);
   $('#URL').prop("disabled", false);
-  $('#contractId').prop("disabled", false);
-  
+  $('#contractId').prop("disabled", false)
+  $("#statuesList").addClass("disableStatues");
 }
 }
-function SaveEditbutton(props) {
-  return (
-    <div className="saveEditbutton">
-      <button>Zapisz</button>
-    </div>
-  );
 
-
-
-}
 
 

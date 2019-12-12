@@ -74,7 +74,10 @@ text-align: right;
 }
 
 
-
+.disableStatues {
+  pointer-events: none;
+  opacity: 0.15;
+}
 
 
 
