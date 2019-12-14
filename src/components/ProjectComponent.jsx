@@ -25,7 +25,7 @@ class ProjectComponent extends Component {
 
     }
     createOrEditProject(name, number, url){
-        console.log(name +" " + number + url);
+        console.log(name +"|" + number + "|"+url);
             }
     handleChange(event) {
         this.setState(

@@ -70,7 +70,7 @@ function ProjectForm(props) {
           </div>
 
           <div className="saveEditbutton">
-          <a href="#" id="save" onClick={() => updateInputValue(projectName, projectUrl, contractId, props.saveProject)}>Zapisz</a>          </div>
+          <button  type="button" id="save" onClick={() => updateInputValue(props.saveProject)}>Zapisz</button>          </div>
 
         </form>
       </div>
@@ -80,10 +80,8 @@ function ProjectForm(props) {
 
 }
 
-function updateInputValue(name, number, url, saveProject) {
-  console.log(name);
-  console.log(number);
-  console.log($('#save').text());
+function updateInputValue(saveProject) {
+
 
 if($('#save').text()==="Zapisz"){
   $('#name').prop("disabled", true);
@@ -91,7 +89,7 @@ if($('#save').text()==="Zapisz"){
   $('#contractId').prop("disabled", true);
   $('#save').text('Edytuj');
   $("#statuesList").removeClass("disableStatues");
-  saveProject( $('#name').text(), $('#contractId').text(),$('#URL').text()); 
+  saveProject( $('#name').val(), $('#contractId').val(),$('#URL').val()); 
 }
 
 else{
