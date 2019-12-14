@@ -12,7 +12,7 @@ class ProjectComponent extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            star5Project: [],
+            star5ProjectStatues: [],
             logoImage: 'logoimg',
             uuid: '',
             name: '',
@@ -25,8 +25,21 @@ class ProjectComponent extends Component {
 
     }
     createOrEditProject(name, number, url){
+    
         console.log(name +"|" + number + "|"+url);
-            }
+        axios.post(`${API_URL}/addNew5star`, { name: name,
+            statues: this.state.star5ProjectStatues})
+        .then(res => {
+          console.log(res);
+          console.log(res.data);
+        })
+   
+    }
+
+
+
+
+            
     handleChange(event) {
         this.setState(
             {
@@ -39,7 +52,7 @@ class ProjectComponent extends Component {
         return axios.post(`${API_URL}/createNew5star`).then(res => {
         this.setState({ logoImage: 'logoimgwith5star' });
         this.setState({ uuid: res.data.uuid  });
-        this.setState({ star5Project: res.data.statues  });
+        this.setState({ star5ProjectStatues: res.data.statues  });
 
         })
     }
@@ -58,7 +71,7 @@ class ProjectComponent extends Component {
                 </header>
                 <div className="content">
                     <Sidebar />
-                    <Content start5={this.state.star5Project} logo={this.state.logoImage} saveProject={this.createOrEditProject} />
+                    <Content start5={this.state.star5ProjectStatues} logo={this.state.logoImage} saveProject={this.createOrEditProject} />
                 </div>
             </React.Fragment>
         )
