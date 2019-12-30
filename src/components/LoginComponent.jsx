@@ -34,6 +34,7 @@ class LoginComponent extends Component {
         AuthenticationService.executeJwtAuthenticationService(this.state.username, this.state.password)
             .then((response) => {
                 AuthenticationService.registerSuccessfulLoginForJwt(this.state.username, response.data.token)
+                localStorage.setItem('authenticatedUser', this.state.username);
                 this.props.history.push(`/5starflow`)
             }).catch(() => {
                 this.setState({ showSuccessMessage: false })

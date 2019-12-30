@@ -28,16 +28,12 @@ class ProjectComponent extends Component {
     
         console.log(name +"|" + number + "|"+url);
         axios.post(`${API_URL}/addNew5star`, { name: name,
-            statues: this.state.star5ProjectStatues})
+            statues: this.state.star5ProjectStatues, uuid: this.state.uuid, contractNumber: number,URL: url,userName: localStorage.getItem('authenticatedUser')})
         .then(res => {
-          console.log(res);
           console.log(res.data);
         })
    
     }
-
-
-
 
             
     handleChange(event) {
