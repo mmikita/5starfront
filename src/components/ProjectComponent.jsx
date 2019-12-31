@@ -9,8 +9,14 @@ import Content from './content.jsx'
 const API_URL = global.apiUrl
 
 class ProjectComponent extends Component {
+
+
+
+
+    
     constructor(props) {
         super(props)
+        this.getAllUserProjects();
         this.state = {
             star5ProjectStatues: [],
             logoImage: 'logoimg',
@@ -21,9 +27,22 @@ class ProjectComponent extends Component {
         }
         this.addNewProject = this.addNewProject.bind(this)
         this.createOrEditProject = this.createOrEditProject.bind(this)
+        this.getAllUserProjects = this.getAllUserProjects.bind(this)
+
 
 
     }
+
+    
+    getAllUserProjects(){
+        axios.post(`${API_URL}/getProjectsByUser`, { login:  localStorage.getItem('authenticatedUser')})
+        .then(res => {
+          console.log(res.data);
+        })
+   
+    }
+    
+
     createOrEditProject(name, number, url){
     
         console.log(name +"|" + number + "|"+url);

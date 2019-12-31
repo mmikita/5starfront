@@ -61,6 +61,9 @@ export default class Sidebar extends Component {
           </select>
         </div>
       </form>
+      <div className="projectList">
+        
+      </div>
     </div>
   }
   toggleSidebar = () => {
