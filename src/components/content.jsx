@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import logo from '../resources/img/5StarWeb_logo.png'
-import { useState } from 'react';
 import $ from 'jquery'; 
 export default class Content extends Component {
 
@@ -51,22 +50,20 @@ export default class Content extends Component {
 }
 
 function ProjectForm(props) {
-  const [projectName, setProjectName] = useState('');
-  const [projectUrl, setProjectUrl] = useState('');
-  const [contractId, setContractId] = useState('');
+
   return (
     <div className="projectData">
       <div>
         <form>
           <div>
             <label htmlFor="name">Nazwa projektu</label>
-            <input name="name" id="name" value={projectName} onChange={e => setProjectName(e.target.value)} />
+            <input name="name" id="name" />
           </div> <div>
             <label htmlFor="contractId">Nr umowy</label>
-            <input name="contractId" id="contractId" value={contractId} onChange={e => setContractId(e.target.value)} />
+            <input name="contractId" id="contractId" />
           </div> <div>
             <label htmlFor="url">URL</label>
-            <input name="URL" id="URL" value={projectUrl} onChange={e => setProjectUrl(e.target.value)} />
+            <input name="URL" id="URL" />
           </div>
 
           <div className="saveEditbutton">

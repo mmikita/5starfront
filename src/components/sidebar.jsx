@@ -13,17 +13,14 @@ export default class Sidebar extends Component {
     return <div className="sidebar">
       <form>
         <input
-          placeholder="Wyszukaj projekt... "
-        />
+          placeholder="Wyszukaj projekt... "/>
         <p>Status:</p>
-
         <ul>
           <li>
             <label>
               <input
                 name="status"
                 type="radio"
-
               /*
               checked={this.state.size === "small"}
               onChange={this.handleChange}*/
@@ -62,7 +59,14 @@ export default class Sidebar extends Component {
         </div>
       </form>
       <div className="projectList">
-        
+      {this.props.projects.map((project) => {
+          return <div key={project.uuid} className="projectOnList">
+            <span>{project.name}</span>
+            <span>i</span>
+            <span>...</span>
+            <button>ok</button>
+          </div>
+        })}
       </div>
     </div>
   }

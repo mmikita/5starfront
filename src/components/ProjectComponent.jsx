@@ -5,19 +5,17 @@ import UseAnimations from 'react-useanimations';
 import axios from 'axios';
 import Sidebar from './sidebar'
 import Content from './content.jsx'
+import $ from 'jquery'; 
+
 
 const API_URL = global.apiUrl
 
 class ProjectComponent extends Component {
-
-
-
-
     
     constructor(props) {
         super(props)
-        this.getAllUserProjects();
         this.state = {
+            sta5rProjects: [],
             star5ProjectStatues: [],
             logoImage: 'logoimg',
             uuid: '',
@@ -25,35 +23,24 @@ class ProjectComponent extends Component {
             contractId: '',
             URL: ''
         }
+        this.getAllUserProjects();
         this.addNewProject = this.addNewProject.bind(this)
         this.createOrEditProject = this.createOrEditProject.bind(this)
         this.getAllUserProjects = this.getAllUserProjects.bind(this)
-
-
-
     }
-
-    
     getAllUserProjects(){
         axios.post(`${API_URL}/getProjectsByUser`, { login:  localStorage.getItem('authenticatedUser')})
         .then(res => {
-          console.log(res.data);
+            this.setState({ sta5rProjects: res.data  });
         })
-   
     }
-    
-
     createOrEditProject(name, number, url){
     
-        console.log(name +"|" + number + "|"+url);
         axios.post(`${API_URL}/addNew5star`, { name: name,
             statues: this.state.star5ProjectStatues, uuid: this.state.uuid, contractNumber: number,URL: url,userName: localStorage.getItem('authenticatedUser')})
         .then(res => {
-          console.log(res.data);
         })
-   
     }
-
             
     handleChange(event) {
         this.setState(
@@ -68,6 +55,9 @@ class ProjectComponent extends Component {
         this.setState({ logoImage: 'logoimgwith5star' });
         this.setState({ uuid: res.data.uuid  });
         this.setState({ star5ProjectStatues: res.data.statues  });
+        $('#name').val("");
+        $('#URL').val("");
+        $('#contractId').val("");
 
         })
     }
@@ -85,7 +75,7 @@ class ProjectComponent extends Component {
                     </div>
                 </header>
                 <div className="content">
-                    <Sidebar />
+                    <Sidebar projects ={this.state.sta5rProjects} />
                     <Content start5={this.state.star5ProjectStatues} logo={this.state.logoImage} saveProject={this.createOrEditProject} />
                 </div>
             </React.Fragment>
