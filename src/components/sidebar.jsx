@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
 import SidebarIcon from './SidebarIcon'
 export default class Sidebar extends Component {
-  state = {
-    isOpen: true
+  constructor(props) {
+    super(props);
+    this.state = {
+      isOpen: true,
+      projects: this.props.projects
+    };
   }
 
   renderSidebar = () => {
@@ -59,16 +63,23 @@ export default class Sidebar extends Component {
         </div>
       </form>
       <div className="projectList">
-      {this.props.projects.map((project) => {
+      {this.state.projects.map((project) => {
           return <div key={project.uuid} className="projectOnList">
             <span>{project.name}</span>
             <span>i</span>
             <span>...</span>
-            <button>ok</button>
+            <button onClick={() =>  window.confirm("Na pewno usuwamy?") && this.deleteProject(project.uuid)}>usuń</button>
           </div>
         })}
       </div>
     </div>
+  }
+
+  deleteProject(uuid){
+
+const projects = this.state.projects.filter(project => project.uuid !== uuid);
+this.setState({ projects: projects });
+
   }
   toggleSidebar = () => {
     this.setState(prevState => ({

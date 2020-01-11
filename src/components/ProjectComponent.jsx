@@ -15,6 +15,7 @@ class ProjectComponent extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            projectsLoaded: false,
             sta5rProjects: [],
             star5ProjectStatues: [],
             logoImage: 'logoimg',
@@ -32,6 +33,9 @@ class ProjectComponent extends Component {
         axios.post(`${API_URL}/getProjectsByUser`, { login:  localStorage.getItem('authenticatedUser')})
         .then(res => {
             this.setState({ sta5rProjects: res.data  });
+            this.setState({ projectsLoaded: true  });
+
+            
         })
     }
     createOrEditProject(name, number, url){
@@ -62,7 +66,11 @@ class ProjectComponent extends Component {
         })
     }
     render() {
+        const projectsLoaded = this.state.projectsLoaded;
         const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
+        
+
+     
         return (
             <React.Fragment>
                 <header>
@@ -75,9 +83,27 @@ class ProjectComponent extends Component {
                     </div>
                 </header>
                 <div className="content">
-                    <Sidebar projects ={this.state.sta5rProjects} />
-                    <Content start5={this.state.star5ProjectStatues} logo={this.state.logoImage} saveProject={this.createOrEditProject} />
-                </div>
+                <div>
+                <div>
+                {projectsLoaded ? (
+        <Sidebar projects ={this.state.sta5rProjects} />
+      ) : (
+       "Brak projektów" 
+      )}
+
+</div>
+
+
+     
+                    </div>
+
+
+        <Content start5={this.state.star5ProjectStatues} logo={this.state.logoImage} saveProject={this.createOrEditProject} />
+
+
+
+                    </div>
+            
             </React.Fragment>
         )
     }
