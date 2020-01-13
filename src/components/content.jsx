@@ -56,6 +56,7 @@ function ProjectForm(props) {
       <div>
         <form>
           <div>
+            <div>
             <label htmlFor="name">Nazwa projektu</label>
             <input name="name" id="name" />
           </div> <div>
@@ -65,7 +66,7 @@ function ProjectForm(props) {
             <label htmlFor="url">URL</label>
             <input name="URL" id="URL" />
           </div>
-
+          </div>
           <div className="saveEditbutton">
           <button  type="button" id="save" onClick={() => updateInputValue(props.saveProject)}>Zapisz</button>          </div>
 

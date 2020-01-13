@@ -28,6 +28,8 @@ class ProjectComponent extends Component {
         this.addNewProject = this.addNewProject.bind(this)
         this.createOrEditProject = this.createOrEditProject.bind(this)
         this.getAllUserProjects = this.getAllUserProjects.bind(this)
+        this.changeProject = this.changeProject.bind(this)
+
     }
     getAllUserProjects(){
         axios.post(`${API_URL}/getProjectsByUser`, { login:  localStorage.getItem('authenticatedUser')})
@@ -38,6 +40,11 @@ class ProjectComponent extends Component {
             
         })
     }
+
+    changeProject = (uuid) => {
+        console.log('uuid' +uuid);
+      }
+
     createOrEditProject(name, number, url){
     
         axios.post(`${API_URL}/addNew5star`, { name: name,
@@ -68,9 +75,6 @@ class ProjectComponent extends Component {
     render() {
         const projectsLoaded = this.state.projectsLoaded;
         const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
-        
-
-     
         return (
             <React.Fragment>
                 <header>
@@ -86,28 +90,17 @@ class ProjectComponent extends Component {
                 <div>
                 <div>
                 {projectsLoaded ? (
-        <Sidebar projects ={this.state.sta5rProjects} />
+        <Sidebar projects ={this.state.sta5rProjects} changeProject={this.changeProject} />
       ) : (
        "Brak projektów" 
       )}
-
-</div>
-
-
-     
+</div>     
                     </div>
-
-
         <Content start5={this.state.star5ProjectStatues} logo={this.state.logoImage} saveProject={this.createOrEditProject} />
-
-
-
                     </div>
-            
             </React.Fragment>
         )
     }
-  
 }
 
 export default withRouter(ProjectComponent)
