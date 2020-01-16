@@ -42,13 +42,23 @@ class ProjectComponent extends Component {
     }
 
     changeProject = (uuid) => {
-        console.log('uuid' +uuid);
+        axios.post(`${API_URL}/getProject`, { uuid:  uuid})
+        .then(res => {
+            this.setState({ star5ProjectStatues: res.data.statues  });
+            this.setState({ uuid: res.data.uuid  });
+            $('#name').val(res.data.name);
+            $('#URL').val(res.data.url);
+            $('#contractId').val(res.data.contractNumber);
+            console.log('uuid' +res.data.contractNumber);
+
+            
+        })
       }
 
     createOrEditProject(name, number, url){
     
         axios.post(`${API_URL}/addNew5star`, { name: name,
-            statues: this.state.star5ProjectStatues, uuid: this.state.uuid, contractNumber: number,URL: url,userName: localStorage.getItem('authenticatedUser')})
+            statues: this.state.star5ProjectStatues, uuid: this.state.uuid, contractNumber: number,url: url,userName: localStorage.getItem('authenticatedUser')})
         .then(res => {
         })
     }
