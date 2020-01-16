@@ -49,7 +49,6 @@ class ProjectComponent extends Component {
             $('#name').val(res.data.name);
             $('#URL').val(res.data.url);
             $('#contractId').val(res.data.contractNumber);
-            console.log('uuid' +res.data.contractNumber);
 
             
         })
@@ -60,6 +59,14 @@ class ProjectComponent extends Component {
         axios.post(`${API_URL}/addNew5star`, { name: name,
             statues: this.state.star5ProjectStatues, uuid: this.state.uuid, contractNumber: number,url: url,userName: localStorage.getItem('authenticatedUser')})
         .then(res => {
+            if(res.data===true){
+console.log("Adding new Project");
+this.setState({ projectsLoaded: false  });
+
+this.getAllUserProjects();
+            }
+
+
         })
     }
             
