@@ -5,13 +5,13 @@ import UseAnimations from 'react-useanimations';
 import axios from 'axios';
 import Sidebar from './sidebar'
 import Content from './content.jsx'
-import $ from 'jquery'; 
+import $ from 'jquery';
 
 
 const API_URL = global.apiUrl
 
 class ProjectComponent extends Component {
-    
+
     constructor(props) {
         super(props)
         this.state = {
@@ -29,47 +29,57 @@ class ProjectComponent extends Component {
         this.createOrEditProject = this.createOrEditProject.bind(this)
         this.getAllUserProjects = this.getAllUserProjects.bind(this)
         this.changeProject = this.changeProject.bind(this)
+        this.changeStatus = this.changeStatus.bind(this)
+
 
     }
-    getAllUserProjects(){
-        axios.post(`${API_URL}/getProjectsByUser`, { login:  localStorage.getItem('authenticatedUser')})
-        .then(res => {
-            this.setState({ sta5rProjects: res.data  });
-            this.setState({ projectsLoaded: true  });
+    getAllUserProjects() {
+        axios.post(`${API_URL}/getProjectsByUser`, { login: localStorage.getItem('authenticatedUser') })
+            .then(res => {
+                this.setState({ sta5rProjects: res.data });
+                this.setState({ projectsLoaded: true });
 
-            
-        })
+
+            })
     }
 
     changeProject = (uuid) => {
-        axios.post(`${API_URL}/getProject`, { uuid:  uuid})
-        .then(res => {
-            this.setState({ star5ProjectStatues: res.data.statues  });
-            this.setState({ uuid: res.data.uuid  });
-            $('#name').val(res.data.name);
-            $('#URL').val(res.data.url);
-            $('#contractId').val(res.data.contractNumber);
-
-            
-        })
-      }
-
-    createOrEditProject(name, number, url){
-    
-        axios.post(`${API_URL}/addNew5star`, { name: name,
-            statues: this.state.star5ProjectStatues, uuid: this.state.uuid, contractNumber: number,url: url,userName: localStorage.getItem('authenticatedUser')})
-        .then(res => {
-            if(res.data===true){
-console.log("Adding new Project");
-this.setState({ projectsLoaded: false  });
-
-this.getAllUserProjects();
-            }
-
-
-        })
+        axios.post(`${API_URL}/getProject`, { uuid: uuid })
+            .then(res => {
+                this.setState({ star5ProjectStatues: res.data.statues });
+                this.setState({ uuid: res.data.uuid });
+                $('#name').val(res.data.name);
+                $('#URL').val(res.data.url);
+                $('#contractId').val(res.data.contractNumber);
+            })
     }
-            
+
+
+    changeStatus = (uuid, finish, skipped) => {
+        console.log("change status");
+        axios.post(`${API_URL}/changeStatus`, { uuid: uuid, finish: finish, skipped: skipped })
+            .then(res => {
+
+            })
+    }
+
+    createOrEditProject(name, number, url) {
+
+        axios.post(`${API_URL}/addNew5star`, {
+            name: name,
+            statues: this.state.star5ProjectStatues, uuid: this.state.uuid, contractNumber: number, url: url, userName: localStorage.getItem('authenticatedUser')
+        })
+            .then(res => {
+                if (res.data === true) {
+                    console.log("Adding new Project");
+                    this.setState({ projectsLoaded: false });
+                    this.getAllUserProjects();
+                }
+
+
+            })
+    }
+
     handleChange(event) {
         this.setState(
             {
@@ -80,12 +90,12 @@ this.getAllUserProjects();
     }
     addNewProject(event) {
         return axios.post(`${API_URL}/createNew5star`).then(res => {
-        this.setState({ logoImage: 'logoimgwith5star' });
-        this.setState({ uuid: res.data.uuid  });
-        this.setState({ star5ProjectStatues: res.data.statues  });
-        $('#name').val("");
-        $('#URL').val("");
-        $('#contractId').val("");
+            this.setState({ logoImage: 'logoimgwith5star' });
+            this.setState({ uuid: res.data.uuid });
+            this.setState({ star5ProjectStatues: res.data.statues });
+            $('#name').val("");
+            $('#URL').val("");
+            $('#contractId').val("");
 
         })
     }
@@ -104,17 +114,17 @@ this.getAllUserProjects();
                     </div>
                 </header>
                 <div className="content">
-                <div>
-                <div>
-                {projectsLoaded ? (
-        <Sidebar projects ={this.state.sta5rProjects} changeProject={this.changeProject} />
-      ) : (
-       "Brak projektów" 
-      )}
-</div>     
+                    <div>
+                        <div>
+                            {projectsLoaded ? (
+                                <Sidebar projects={this.state.sta5rProjects} changeProject={this.changeProject} />
+                            ) : (
+                                    "Brak projektów"
+                                )}
+                        </div>
                     </div>
-        <Content start5={this.state.star5ProjectStatues} logo={this.state.logoImage} saveProject={this.createOrEditProject} />
-                    </div>
+                    <Content start5={this.state.star5ProjectStatues} logo={this.state.logoImage} saveProject={this.createOrEditProject} changeStatus={this.changeStatus} />
+                </div>
             </React.Fragment>
         )
     }
