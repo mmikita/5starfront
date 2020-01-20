@@ -62,12 +62,28 @@ height: 100%;
 
 
 .toDoLi{
-background-color: green;
+background-color: black;
 margin-top: 5px;
 margin-bottom: 5px;
 padding-top: 3px;
 padding-bottom: 3px;
 }
+.toDoLiSkipped{
+  background-color: gray;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  }
+  .toDoLiDone{
+    background-color: green;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    }
+  
+
 
 .loginbutton{
 text-align: right;

@@ -6,6 +6,8 @@ import axios from 'axios';
 import Sidebar from './sidebar'
 import Content from './content.jsx'
 import $ from 'jquery';
+import update from 'immutability-helper';
+
 
 
 const API_URL = global.apiUrl
@@ -22,7 +24,8 @@ class ProjectComponent extends Component {
             uuid: '',
             name: '',
             contractId: '',
-            URL: ''
+            URL: '',
+       
         }
         this.getAllUserProjects();
         this.addNewProject = this.addNewProject.bind(this)
@@ -30,17 +33,16 @@ class ProjectComponent extends Component {
         this.getAllUserProjects = this.getAllUserProjects.bind(this)
         this.changeProject = this.changeProject.bind(this)
         this.changeStatus = this.changeStatus.bind(this)
-
-
+        this.getIndex = this.getIndex.bind(this)
     }
     getAllUserProjects() {
         axios.post(`${API_URL}/getProjectsByUser`, { login: localStorage.getItem('authenticatedUser') })
             .then(res => {
                 this.setState({ sta5rProjects: res.data });
                 this.setState({ projectsLoaded: true });
-
-
             })
+
+          
     }
 
     changeProject = (uuid) => {
@@ -53,14 +55,30 @@ class ProjectComponent extends Component {
                 $('#contractId').val(res.data.contractNumber);
             })
     }
-
-
     changeStatus = (uuid, finish, skipped) => {
-        console.log("change status");
+        console.log("dsds");
+        $("#"+uuid).addClass("toDoLiSkipped");
+
+       const index = this.getIndex(uuid, this.state.star5ProjectStatues, "uuid");
+       this.state.star5ProjectStatues[index].skipped = true;
+       this.forceUpdate();
+
         axios.post(`${API_URL}/changeStatus`, { uuid: uuid, finish: finish, skipped: skipped })
             .then(res => {
 
             })
+
+      
+    }
+
+
+    getIndex(value, arr, prop) {
+        for(var i = 0; i < arr.length; i++) {
+            if(arr[i][prop] === value) {
+                return i;
+            }
+        }
+        return -1; //to handle the case where the value doesn't exist
     }
 
     createOrEditProject(name, number, url) {
@@ -75,8 +93,6 @@ class ProjectComponent extends Component {
                     this.setState({ projectsLoaded: false });
                     this.getAllUserProjects();
                 }
-
-
             })
     }
 

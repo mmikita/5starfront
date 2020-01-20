@@ -36,8 +36,8 @@ export default class Content extends Component {
         {projectName}
         <div id="statuesList" className="disableStatues">
           {this.props.start5.map((status) => {
-            return <div key={status.name} className="toDoLi">
-              <span>{status.name}</span>
+            return <div id={status.uuid} key={status.name} className="toDoLi">
+              <span>{status.name}</span><span> {status.skipped.toString()}</span>
               {status.finish ? (
                 <button onClick={() => this.props.changeStatus(status.uuid,status.finish,status.skipped)}>zrobione</button>
               ) : (
