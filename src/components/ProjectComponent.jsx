@@ -6,7 +6,6 @@ import axios from 'axios';
 import Sidebar from './sidebar'
 import Content from './content.jsx'
 import $ from 'jquery';
-import update from 'immutability-helper';
 
 
 
@@ -41,10 +40,7 @@ class ProjectComponent extends Component {
                 this.setState({ sta5rProjects: res.data });
                 this.setState({ projectsLoaded: true });
             })
-
-          
     }
-
     changeProject = (uuid) => {
         axios.post(`${API_URL}/getProject`, { uuid: uuid })
             .then(res => {
@@ -56,22 +52,24 @@ class ProjectComponent extends Component {
             })
     }
     changeStatus = (uuid, finish, skipped) => {
-        console.log("dsds");
-        $("#"+uuid).addClass("toDoLiSkipped");
-
+        if(finish===true){
+            $("#"+uuid).css("background-color", "green");
+        }else if(skipped===true){
+            $("#"+uuid).css("background-color", "gray");
+        }else if(finish===false){
+            console.log("innn");
+            $("#"+uuid).css("background-color", "black");
+        }
        const index = this.getIndex(uuid, this.state.star5ProjectStatues, "uuid");
-       this.state.star5ProjectStatues[index].skipped = true;
-       this.forceUpdate();
-
+       var statues = this.state.star5ProjectStatues;
+       statues[index].finish = finish;
+       statues[index].skipped = skipped;
+       this.setState({ star5ProjectStatues: statues });
         axios.post(`${API_URL}/changeStatus`, { uuid: uuid, finish: finish, skipped: skipped })
             .then(res => {
 
             })
-
-      
     }
-
-
     getIndex(value, arr, prop) {
         for(var i = 0; i < arr.length; i++) {
             if(arr[i][prop] === value) {
@@ -82,7 +80,6 @@ class ProjectComponent extends Component {
     }
 
     createOrEditProject(name, number, url) {
-
         axios.post(`${API_URL}/addNew5star`, {
             name: name,
             statues: this.state.star5ProjectStatues, uuid: this.state.uuid, contractNumber: number, url: url, userName: localStorage.getItem('authenticatedUser')

@@ -36,14 +36,17 @@ export default class Content extends Component {
         {projectName}
         <div id="statuesList" className="disableStatues">
           {this.props.start5.map((status) => {
-            return <div id={status.uuid} key={status.name} className="toDoLi">
-              <span>{status.name}</span><span> {status.skipped.toString()}</span>
+            return <div id={status.uuid} key={status.name} className= {(status.finish ? 'toDoLiDone' : status.skipped ? 'toDoLiSkipped' : 'toDoLi')}>     
+              <span>skonczony</span><span> {status.finish.toString()}</span>
+              <span> pominiety</span><span> {status.skipped.toString()}</span>
               {status.finish ? (
-                <button onClick={() => this.props.changeStatus(status.uuid,status.finish,status.skipped)}>zrobione</button>
+                <div>
+                <button onClick={() => this.props.changeStatus(status.uuid,false,false)}>niezrobione</button>
+                </div>
               ) : (
                   <div>
-                    <button onClick={() => this.props.changeStatus(status.uuid,status.finish,status.skipped)}>niezrobione</button>
-                    <button>pomiń</button>
+                    <button onClick={() => this.props.changeStatus(status.uuid,true,false)}>zrobione</button>
+                    {status.skipped===false ? (  <button onClick={() => this.props.changeStatus(status.uuid,false,true)}>pomiń</button>  ) : (<button onClick={() => this.props.changeStatus(status.uuid,false,false)}>do zrobienia</button> )}
                   </div>
                 )}
             </div>
