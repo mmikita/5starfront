@@ -1,15 +1,12 @@
 import React, { Component } from 'react'
-import axios from 'axios';
 import SidebarIcon from './SidebarIcon'
 
-const API_URL = global.apiUrl
 
 export default class Sidebar extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isOpen: true,
-      projects: this.props.projects
     };
   }
 
@@ -67,29 +64,21 @@ export default class Sidebar extends Component {
         </div>
       </form>
       <div className="projectList">
-      {this.state.projects.map((project) => {
+      {this.props.projects.map((project) => {
           return <div key={project.uuid} className="projectOnList">
             <div className="projectName" onClick={() => this.props.changeProject(project.uuid)}>
             <span>{project.name}</span>
             <span>i</span>
             <span>...</span>
             </div>
-            <button onClick={() =>  window.confirm("Na pewno usuwamy?") && this.deleteProject(project.uuid)}>usuń</button>
+            <button onClick={() =>  window.confirm("Na pewno usuwamy?") && this.props.deleteProject(project.uuid)}>usuń</button>
           </div>
         })}
       </div>
     </div>
   }
 
-  deleteProject(uuid){
-
-const projects = this.state.projects.filter(project => project.uuid !== uuid);
-this.setState({ projects: projects });
-axios.post(`${API_URL}/deleteProject`, { uuid: uuid})
-.then(res => {
-
-})
-  }
+ 
   toggleSidebar = () => {
     this.setState(prevState => ({
       isOpen: !prevState.isOpen

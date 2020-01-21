@@ -33,6 +33,9 @@ class ProjectComponent extends Component {
         this.changeProject = this.changeProject.bind(this)
         this.changeStatus = this.changeStatus.bind(this)
         this.getIndex = this.getIndex.bind(this)
+        this.deleteProject = this.deleteProject.bind(this)
+
+        
     }
     getAllUserProjects() {
         axios.post(`${API_URL}/getProjectsByUser`, { login: localStorage.getItem('authenticatedUser') })
@@ -49,15 +52,25 @@ class ProjectComponent extends Component {
                 $('#name').val(res.data.name);
                 $('#URL').val(res.data.url);
                 $('#contractId').val(res.data.contractNumber);
+                $('.toDoLi, .toDoLiSkipped, .toDoLiDone').removeAttr( 'style' );
+                $('#name').prop("disabled", true);
+                $('#URL').prop("disabled", true);
+                $('#contractId').prop("disabled", true);
+    $('#save').text('Edytuj');
+                $("#statuesList").removeClass("disableStatues");
+
+
+
             })
-    }
+
+
+             }
     changeStatus = (uuid, finish, skipped) => {
         if(finish===true){
             $("#"+uuid).css("background-color", "green");
         }else if(skipped===true){
             $("#"+uuid).css("background-color", "gray");
         }else if(finish===false){
-            console.log("innn");
             $("#"+uuid).css("background-color", "black");
         }
        const index = this.getIndex(uuid, this.state.star5ProjectStatues, "uuid");
@@ -79,18 +92,28 @@ class ProjectComponent extends Component {
         return -1; //to handle the case where the value doesn't exist
     }
 
-    createOrEditProject(name, number, url) {
+    createOrEditProject(name, number, url, uuid) {
         axios.post(`${API_URL}/addNew5star`, {
             name: name,
             statues: this.state.star5ProjectStatues, uuid: this.state.uuid, contractNumber: number, url: url, userName: localStorage.getItem('authenticatedUser')
         })
             .then(res => {
                 if (res.data === true) {
-                    console.log("Adding new Project");
-                    this.setState({ projectsLoaded: false });
                     this.getAllUserProjects();
+
+                }else{
+                    const index = this.getIndex(this.state.uuid, this.state.sta5rProjects, "uuid");
+                    var projects = this.state.sta5rProjects;
+                    projects[index].name = name;
+                    this.setState({ sta5rProjects: projects });
+
+
                 }
-            })
+            }
+            
+            
+            
+            )
     }
 
     handleChange(event) {
@@ -101,6 +124,9 @@ class ProjectComponent extends Component {
             }
         )
     }
+
+    
+
     addNewProject(event) {
         return axios.post(`${API_URL}/createNew5star`).then(res => {
             this.setState({ logoImage: 'logoimgwith5star' });
@@ -112,8 +138,17 @@ class ProjectComponent extends Component {
 
         })
     }
+
+    deleteProject(uuid){
+
+        const projects = this.state.sta5rProjects.filter(project => project.uuid !== uuid);
+        this.setState({ sta5rProjects: projects });
+    axios.post(`${API_URL}/deleteProject`, { uuid: uuid})
+    .then(res => {
+    
+    })
+      }
     render() {
-        const projectsLoaded = this.state.projectsLoaded;
         const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
         return (
             <React.Fragment>
@@ -129,11 +164,10 @@ class ProjectComponent extends Component {
                 <div className="content">
                     <div>
                         <div>
-                            {projectsLoaded ? (
-                                <Sidebar projects={this.state.sta5rProjects} changeProject={this.changeProject} />
-                            ) : (
-                                    "Brak projektów"
-                                )}
+                          
+                                <Sidebar projects={this.state.sta5rProjects} changeProject={this.changeProject} deleteProject={this.deleteProject} /> deleteProject
+                      
+                          
                         </div>
                     </div>
                     <Content start5={this.state.star5ProjectStatues} logo={this.state.logoImage} saveProject={this.createOrEditProject} changeStatus={this.changeStatus} />
