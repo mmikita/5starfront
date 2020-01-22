@@ -49,13 +49,14 @@ height: 100%;
 }
 .content-container{
   margin: 0 auto;
+  height: 100%;
 }
 .logoimgwith5star{
   width: 20%;
 }
 .project{
   margin: 0 auto;
-  height: 100vh;  width: 100%;
+   width: 100%;
   overflow: auto;
   background-color: #394f5a;
 }
@@ -83,27 +84,25 @@ padding-bottom: 3px;
     padding-bottom: 3px;
     }
   
-
-
 .loginbutton{
 text-align: right;
 }
-
-
 .disableStatues {
   pointer-events: none;
   opacity: 0.15;
 }
 
-
 .projectOnList{
 position: relative;
-
 }
+div.sidebar-icon{
+  padding-top: 10px;
+  }
 
-
-
-
+#statuesList{
+  overflow: auto;
+  height: 100%;
+}
 
 
 
@@ -162,9 +161,7 @@ background-color: gainsboro;
   min-height: 100vh;
 }
 
-div.sidebar-icon{
-margin-top: 10px;
-}
+
  
 ul{
     list-style-type: none;

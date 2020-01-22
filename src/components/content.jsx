@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
 import logo from '../resources/img/5StarWeb_logo.png'
 import $ from 'jquery';
+import StatusComponent from './StatusComponent.jsx';
+
+
 export default class Content extends Component {
+
+ 
 
   constructor(props) {
 
@@ -13,6 +18,17 @@ export default class Content extends Component {
       contractId: "",
       saveProject: props.saveProject,
     }
+
+    // {this.props.start5.map((status) => <StatusComponent key = {status.uuid} status={status} changeStatus={this.props.changeStatus} />)}  
+
+    // const SortableGifsContainer = sortableContainer(({ children }) => <div className="statues">{children}</div>);
+    
+    // const SortableStatus = sortableElement(({ status }) =>  <StatusComponent key = {status.uuid} status={status} changeStatus={this.props.changeStatus} />);
+
+    
+
+
+  
   }
   handleChange(event) {
     this.setState(
@@ -35,22 +51,21 @@ export default class Content extends Component {
       <div className="project">
         {projectName}
         <div id="statuesList" className="disableStatues">
-          {this.props.start5.map((status) => {
-            return <div id={status.uuid} key={status.name} className= {(status.finish ? 'toDoLiDone' : status.skipped ? 'toDoLiSkipped' : 'toDoLi')}>     
-              <span>skonczony</span><span> {status.finish.toString()}</span>
-              <span> pominiety</span><span> {status.skipped.toString()}</span>
-              {status.finish ? (
-                <div>
-                <button onClick={() => this.props.changeStatus(status.uuid,false,false)}>niezrobione</button>
-                </div>
-              ) : (
-                  <div>
-                    <button onClick={() => this.props.changeStatus(status.uuid,true,false)}>zrobione</button>
-                    {status.skipped===false ? (  <button onClick={() => this.props.changeStatus(status.uuid,false,true)}>pomiń</button>  ) : (<button onClick={() => this.props.changeStatus(status.uuid,false,false)}>do zrobienia</button> )}
-                  </div>
-                )}
-            </div>
-          })}
+
+ {/* <SortableGifsContainer axis="y">
+  {gifs.map((gif, i) =>
+    <SortableGif
+    // don't forget to pass index prop with item index
+      index={i}
+      key={gif}
+      gif={gif}
+    />
+  )}
+</SortableGifsContainer> */}
+
+        {this.props.start5.map((status) => <StatusComponent key = {status.uuid} status={status} changeStatus={this.props.changeStatus} />)}  
+
+      
         </div>
       </div>
     </div>
@@ -81,13 +96,8 @@ function ProjectForm(props) {
       </div>
     </div>
   );
-
-
 }
-
 function updateInputValue(saveProject) {
-
-
   if ($('#save').text() === "Zapisz") {
     $('#name').prop("disabled", true);
     $('#URL').prop("disabled", true);
@@ -96,7 +106,6 @@ function updateInputValue(saveProject) {
     $("#statuesList").removeClass("disableStatues");
     saveProject($('#name').val(), $('#contractId').val(), $('#URL').val());
   }
-
   else {
     $('#save').text('Zapisz');
     $('#name').prop("disabled", false);

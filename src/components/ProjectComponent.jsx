@@ -6,6 +6,7 @@ import axios from 'axios';
 import Sidebar from './sidebar'
 import Content from './content.jsx'
 import $ from 'jquery';
+import Sortable from 'react-sortablejs';
 
 
 
@@ -19,7 +20,7 @@ class ProjectComponent extends Component {
             projectsLoaded: false,
             sta5rProjects: [],
             star5ProjectStatues: [],
-            logoImage: 'logoimg',
+            logoImage: 'logoimgwith5star',
             uuid: '',
             name: '',
             contractId: '',
@@ -107,12 +108,8 @@ class ProjectComponent extends Component {
                     projects[index].name = name;
                     this.setState({ sta5rProjects: projects });
 
-
                 }
             }
-            
-            
-            
             )
     }
 
@@ -129,9 +126,13 @@ class ProjectComponent extends Component {
 
     addNewProject(event) {
         return axios.post(`${API_URL}/createNew5star`).then(res => {
-            this.setState({ logoImage: 'logoimgwith5star' });
             this.setState({ uuid: res.data.uuid });
             this.setState({ star5ProjectStatues: res.data.statues });
+            $('#name').prop("disabled", false);
+            $('#URL').prop("disabled", false);
+            $('#contractId').prop("disabled", false);
+$('#save').text('Zapisz');
+            $("#statuesList").addClass("disableStatues");
             $('#name').val("");
             $('#URL').val("");
             $('#contractId').val("");
