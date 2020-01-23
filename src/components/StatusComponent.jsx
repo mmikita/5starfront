@@ -21,8 +21,9 @@ class StatusComponent extends Component {
     }
     render() {
         return (
-            <div id={this.props.status.uuid} key={this.props.status.name} className= {(this.props.status.finish ? 'toDoLiDone' : this.props.status.skipped ? 'toDoLiSkipped' : 'toDoLi')}>     
-            <span>skonczony</span><span> {this.props.status.finish.toString()}</span>
+          <div className="statusWrapper">
+            <div  id={this.props.status.uuid} key={this.props.status.name} className= {(this.props.status.finish ? 'toDoLiDone' : this.props.status.skipped ? 'toDoLiSkipped' : 'toDoLi')}>     
+            <span>numer: </span><span> {this.props.status.orderPlace}</span>
             <span> pominiety</span><span> {this.props.status.skipped.toString()}</span>
             {this.props.status.finish ? (
               <div>
@@ -35,12 +36,11 @@ class StatusComponent extends Component {
                 </div>
               )}
           </div>
+          </div>
         )
     }
 }
 
-StatusComponent.propTypes = {
-    StatusComponent: PropTypes.string.isRequired,
-  };
+
 
 export default StatusComponent

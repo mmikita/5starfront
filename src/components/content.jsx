@@ -2,14 +2,17 @@ import React, { Component } from 'react'
 import logo from '../resources/img/5StarWeb_logo.png'
 import $ from 'jquery';
 import StatusComponent from './StatusComponent.jsx';
+import { sortableContainer, sortableElement } from 'react-sortable-hoc';
+
+const SortableStatuesContainer = sortableContainer(({ children }) => <div className="statues">{children}</div>);
+    
+const SortableStatus = sortableElement(({ status, changeStatus, index }) =>  <StatusComponent index={index} key = {status.orderPlace} status={status} changeStatus={changeStatus} />);
+
+
 
 
 export default class Content extends Component {
-
- 
-
-  constructor(props) {
-
+ constructor(props) {
     super(props)
     this.state = {
       blankContent: "",
@@ -18,18 +21,9 @@ export default class Content extends Component {
       contractId: "",
       saveProject: props.saveProject,
     }
-
-    // {this.props.start5.map((status) => <StatusComponent key = {status.uuid} status={status} changeStatus={this.props.changeStatus} />)}  
-
-    // const SortableGifsContainer = sortableContainer(({ children }) => <div className="statues">{children}</div>);
-    
-    // const SortableStatus = sortableElement(({ status }) =>  <StatusComponent key = {status.uuid} status={status} changeStatus={this.props.changeStatus} />);
-
-    
-
-
   
   }
+  
   handleChange(event) {
     this.setState(
       {
@@ -52,18 +46,20 @@ export default class Content extends Component {
         {projectName}
         <div id="statuesList" className="disableStatues">
 
- {/* <SortableGifsContainer axis="y">
-  {gifs.map((gif, i) =>
-    <SortableGif
-    // don't forget to pass index prop with item index
-      index={i}
-      key={gif}
-      gif={gif}
+        <SortableStatuesContainer axis='y' revert='true' scroll='false'   placeholder="sortable-placeholder" cursor="move"
+  onSortEnd={this.props.onSortEnd}>
+  {this.props.start5.map((status) =>
+    <SortableStatus
+      key={status.orderPlace}
+      status={status}
+      index={status.orderPlace}
+      StatusComponent={status}
+      
+      changeStatus ={this.props.changeStatus}
     />
   )}
-</SortableGifsContainer> */}
+</SortableStatuesContainer>
 
-        {this.props.start5.map((status) => <StatusComponent key = {status.uuid} status={status} changeStatus={this.props.changeStatus} />)}  
 
       
         </div>
@@ -71,6 +67,9 @@ export default class Content extends Component {
     </div>
   }
 }
+
+
+
 
 function ProjectForm(props) {
 

@@ -6,7 +6,8 @@ import axios from 'axios';
 import Sidebar from './sidebar'
 import Content from './content.jsx'
 import $ from 'jquery';
-import Sortable from 'react-sortablejs';
+import arrayMove from 'array-move';
+
 
 
 
@@ -35,6 +36,8 @@ class ProjectComponent extends Component {
         this.changeStatus = this.changeStatus.bind(this)
         this.getIndex = this.getIndex.bind(this)
         this.deleteProject = this.deleteProject.bind(this)
+        this.onSortEnd = this.onSortEnd.bind(this)
+        
 
         
     }
@@ -149,6 +152,23 @@ $('#save').text('Zapisz');
     
     })
       }
+
+      onSortEnd = ({ oldIndex, newIndex }) =>{
+        this.setState({ star5ProjectStatues: arrayMove(this.state.star5ProjectStatues, oldIndex, newIndex) })
+    this.forceUpdate();
+
+    var statues = this.state.star5ProjectStatues;
+
+ for (var i = 0; i < this.state.star5ProjectStatues.length; i++) {
+    statues[i].orderPlace = i;
+
+    //Do something
+}
+this.setState({ star5ProjectStatues: statues });
+
+
+    };
+    
     render() {
         const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
         return (
@@ -171,7 +191,7 @@ $('#save').text('Zapisz');
                           
                         </div>
                     </div>
-                    <Content start5={this.state.star5ProjectStatues} logo={this.state.logoImage} saveProject={this.createOrEditProject} changeStatus={this.changeStatus} />
+                    <Content start5={this.state.star5ProjectStatues} logo={this.state.logoImage} saveProject={this.createOrEditProject} changeStatus={this.changeStatus} onSortEnd={this.onSortEnd} />
                 </div>
             </React.Fragment>
         )
