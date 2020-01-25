@@ -93,7 +93,7 @@ class ProjectComponent extends Component {
                 return i;
             }
         }
-        return -1; //to handle the case where the value doesn't exist
+        return -1; 
     }
 
     createOrEditProject(name, number, url, uuid) {
@@ -158,12 +158,19 @@ $('#save').text('Zapisz');
     this.forceUpdate();
 
     var statues = this.state.star5ProjectStatues;
+    var orderPlaces = [];
 
- for (var i = 0; i < this.state.star5ProjectStatues.length; i++) {
-    statues[i].orderPlace = i;
+    for (var i = 0; i < this.state.star5ProjectStatues.length; i++) {
+        statues[i].orderPlace = i;
+    }
 
-    //Do something
-}
+    axios.post(`${API_URL}/updateOrderPlaces`, statues )
+    .then(res => {
+
+    })
+
+
+ 
 this.setState({ star5ProjectStatues: statues });
 
 
@@ -185,10 +192,7 @@ this.setState({ star5ProjectStatues: statues });
                 <div className="content">
                     <div>
                         <div>
-                          
                                 <Sidebar projects={this.state.sta5rProjects} changeProject={this.changeProject} deleteProject={this.deleteProject} /> deleteProject
-                      
-                          
                         </div>
                     </div>
                     <Content start5={this.state.star5ProjectStatues} logo={this.state.logoImage} saveProject={this.createOrEditProject} changeStatus={this.changeStatus} onSortEnd={this.onSortEnd} />
