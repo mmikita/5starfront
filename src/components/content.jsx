@@ -5,14 +5,14 @@ import StatusComponent from './StatusComponent.jsx';
 import { sortableContainer, sortableElement } from 'react-sortable-hoc';
 
 const SortableStatuesContainer = sortableContainer(({ children }) => <div className="statues">{children}</div>);
-    
-const SortableStatus = sortableElement(({ status, changeStatus, index }) =>  <StatusComponent index={index} key = {status.orderPlace} status={status} changeStatus={changeStatus} />);
+
+const SortableStatus = sortableElement(({ status, changeStatus, index }) => <StatusComponent index={index} key={status.orderPlace} status={status} changeStatus={changeStatus} />);
 
 
 
 
 export default class Content extends Component {
- constructor(props) {
+  constructor(props) {
     super(props)
     this.state = {
       blankContent: "",
@@ -21,9 +21,9 @@ export default class Content extends Component {
       contractId: "",
       saveProject: props.saveProject,
     }
-  
+
   }
-  
+
   handleChange(event) {
     this.setState(
       {
@@ -34,45 +34,65 @@ export default class Content extends Component {
   }
   render() {
     let projectName;
-
-
     if (this.props.start5.length !== 0) {
-      projectName = <ProjectForm saveProject={this.state.saveProject} />;
+      projectName = <ProjectForm saveProject={this.state.saveProject} />
     }
-    return <div
-      className="content-container">
+    return( <div className="content-container">
       <img className={this.props.logo} src={logo} alt="Logo" />
       <div className="project">
         {projectName}
         <div id="statuesList" className="disableStatues">
+          <SortableStatuesContainer axis='y' revert='true' scroll='false' placeholder="sortable-placeholder" cursor="move"
+            onSortEnd={this.props.onSortEnd}>
+            {this.props.start5.map((status) =>
+              <SortableStatus
+                key={status.orderPlace}
+                status={status}
+                index={status.orderPlace}
+                StatusComponent={status}
+                changeStatus={this.props.changeStatus}
+              />
+            )}
+          </SortableStatuesContainer>
+          {this.props.start5.length !== 0 ?  <AddStatus addStatus={this.props.addStatus} /> : ""}  
 
-        <SortableStatuesContainer axis='y' revert='true' scroll='false'   placeholder="sortable-placeholder" cursor="move"
-  onSortEnd={this.props.onSortEnd}>
-  {this.props.start5.map((status) =>
-    <SortableStatus
-      key={status.orderPlace}
-      status={status}
-      index={status.orderPlace}
-      StatusComponent={status}
-      
-      changeStatus ={this.props.changeStatus}
-    />
-  )}
-</SortableStatuesContainer>
-
-
-      
         </div>
       </div>
     </div>
+            )
+        
+
+
   }
+ 
+
 }
 
 
-
+function AddStatus(props) {
+  return (
+    <div className="addStatus">
+        <div>
+            <form>
+              <div>
+                <div>
+                  <label htmlFor="1">Nazwa statusu</label>
+                  <input name="1"  />
+                </div>
+                <div>
+                  <label htmlFor="2">Opis Statusu</label>
+                  <input name="2"  />
+                </div>
+              </div>
+              <div>
+                <button type="button" id="addStatus" onClick={() => addStatus(props.addStatus)}>Dodaj</button>          </div>
+            </form>
+          </div>
+    </div>
+  );
+}
 
 function ProjectForm(props) {
-
   return (
     <div className="projectData">
       <div>
@@ -114,5 +134,8 @@ function updateInputValue(saveProject) {
   }
 }
 
+function addStatus(addStatus) {
+addStatus("1", "2");
+}
 
 

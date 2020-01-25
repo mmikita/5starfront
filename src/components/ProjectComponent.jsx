@@ -26,7 +26,7 @@ class ProjectComponent extends Component {
             name: '',
             contractId: '',
             URL: '',
-       
+
         }
         this.getAllUserProjects();
         this.addNewProject = this.addNewProject.bind(this)
@@ -37,9 +37,11 @@ class ProjectComponent extends Component {
         this.getIndex = this.getIndex.bind(this)
         this.deleteProject = this.deleteProject.bind(this)
         this.onSortEnd = this.onSortEnd.bind(this)
-        
+        this.addStatus = this.addStatus.bind(this)
 
-        
+
+
+
     }
     getAllUserProjects() {
         axios.post(`${API_URL}/getProjectsByUser`, { login: localStorage.getItem('authenticatedUser') })
@@ -56,11 +58,11 @@ class ProjectComponent extends Component {
                 $('#name').val(res.data.name);
                 $('#URL').val(res.data.url);
                 $('#contractId').val(res.data.contractNumber);
-                $('.toDoLi, .toDoLiSkipped, .toDoLiDone').removeAttr( 'style' );
+                $('.toDoLi, .toDoLiSkipped, .toDoLiDone').removeAttr('style');
                 $('#name').prop("disabled", true);
                 $('#URL').prop("disabled", true);
                 $('#contractId').prop("disabled", true);
-    $('#save').text('Edytuj');
+                $('#save').text('Edytuj');
                 $("#statuesList").removeClass("disableStatues");
 
 
@@ -68,32 +70,53 @@ class ProjectComponent extends Component {
             })
 
 
-             }
+    }
     changeStatus = (uuid, finish, skipped) => {
-        if(finish===true){
-            $("#"+uuid).css("background-color", "green");
-        }else if(skipped===true){
-            $("#"+uuid).css("background-color", "gray");
-        }else if(finish===false){
-            $("#"+uuid).css("background-color", "black");
+        if (finish === true) {
+            $("#" + uuid).css("background-color", "green");
+        } else if (skipped === true) {
+            $("#" + uuid).css("background-color", "gray");
+        } else if (finish === false) {
+            $("#" + uuid).css("background-color", "black");
         }
-       const index = this.getIndex(uuid, this.state.star5ProjectStatues, "uuid");
-       var statues = this.state.star5ProjectStatues;
-       statues[index].finish = finish;
-       statues[index].skipped = skipped;
-       this.setState({ star5ProjectStatues: statues });
+        const index = this.getIndex(uuid, this.state.star5ProjectStatues, "uuid");
+        var statues = this.state.star5ProjectStatues;
+        statues[index].finish = finish;
+        statues[index].skipped = skipped;
+        this.setState({ star5ProjectStatues: statues });
         axios.post(`${API_URL}/changeStatus`, { uuid: uuid, finish: finish, skipped: skipped })
             .then(res => {
 
             })
     }
     getIndex(value, arr, prop) {
-        for(var i = 0; i < arr.length; i++) {
-            if(arr[i][prop] === value) {
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[i][prop] === value) {
                 return i;
             }
         }
-        return -1; 
+        return -1;
+    }
+
+    addStatus(name, statusNote) {
+        var newStatus = [];
+        newStatus.orderPlace = this.state.star5ProjectStatues.length;
+        newStatus.name = name;
+        newStatus.finish = false;
+        newStatus.skipped = false;
+
+        newStatus.statusNote = statusNote;
+      
+
+
+        this.setState(previousState => ({
+            star5ProjectStatues: [...previousState.star5ProjectStatues, newStatus]
+        }));
+        console.log(this.state.star5ProjectStatues);
+
+
+
+
     }
 
     createOrEditProject(name, number, url, uuid) {
@@ -104,13 +127,11 @@ class ProjectComponent extends Component {
             .then(res => {
                 if (res.data === true) {
                     this.getAllUserProjects();
-
-                }else{
+                } else {
                     const index = this.getIndex(this.state.uuid, this.state.sta5rProjects, "uuid");
                     var projects = this.state.sta5rProjects;
                     projects[index].name = name;
                     this.setState({ sta5rProjects: projects });
-
                 }
             }
             )
@@ -125,7 +146,7 @@ class ProjectComponent extends Component {
         )
     }
 
-    
+
 
     addNewProject(event) {
         return axios.post(`${API_URL}/createNew5star`).then(res => {
@@ -134,7 +155,7 @@ class ProjectComponent extends Component {
             $('#name').prop("disabled", false);
             $('#URL').prop("disabled", false);
             $('#contractId').prop("disabled", false);
-$('#save').text('Zapisz');
+            $('#save').text('Zapisz');
             $("#statuesList").addClass("disableStatues");
             $('#name').val("");
             $('#URL').val("");
@@ -143,39 +164,33 @@ $('#save').text('Zapisz');
         })
     }
 
-    deleteProject(uuid){
+    deleteProject(uuid) {
 
         const projects = this.state.sta5rProjects.filter(project => project.uuid !== uuid);
         this.setState({ sta5rProjects: projects });
-    axios.post(`${API_URL}/deleteProject`, { uuid: uuid})
-    .then(res => {
-    
-    })
-      }
+        axios.post(`${API_URL}/deleteProject`, { uuid: uuid })
+            .then(res => {
 
-      onSortEnd = ({ oldIndex, newIndex }) =>{
-        this.setState({ star5ProjectStatues: arrayMove(this.state.star5ProjectStatues, oldIndex, newIndex) })
-    this.forceUpdate();
-
-    var statues = this.state.star5ProjectStatues;
-    var orderPlaces = [];
-
-    for (var i = 0; i < this.state.star5ProjectStatues.length; i++) {
-        statues[i].orderPlace = i;
+            })
     }
 
-    axios.post(`${API_URL}/updateOrderPlaces`, statues )
-    .then(res => {
+    onSortEnd = ({ oldIndex, newIndex }) => {
+        this.setState({ star5ProjectStatues: arrayMove(this.state.star5ProjectStatues, oldIndex, newIndex) })
+        this.forceUpdate();
 
-    })
+        var statues = this.state.star5ProjectStatues;
+        var orderPlaces = [];
 
+        for (var i = 0; i < this.state.star5ProjectStatues.length; i++) {
+            statues[i].orderPlace = i;
+        }
 
- 
-this.setState({ star5ProjectStatues: statues });
-
-
+        axios.post(`${API_URL}/updateOrderPlaces`, statues)
+            .then(res => {
+            })
+        this.setState({ star5ProjectStatues: statues });
     };
-    
+
     render() {
         const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
         return (
@@ -192,10 +207,10 @@ this.setState({ star5ProjectStatues: statues });
                 <div className="content">
                     <div>
                         <div>
-                                <Sidebar projects={this.state.sta5rProjects} changeProject={this.changeProject} deleteProject={this.deleteProject} /> deleteProject
+                            <Sidebar projects={this.state.sta5rProjects} changeProject={this.changeProject} deleteProject={this.deleteProject} /> deleteProject
                         </div>
                     </div>
-                    <Content start5={this.state.star5ProjectStatues} logo={this.state.logoImage} saveProject={this.createOrEditProject} changeStatus={this.changeStatus} onSortEnd={this.onSortEnd} />
+                    <Content start5={this.state.star5ProjectStatues} logo={this.state.logoImage} saveProject={this.createOrEditProject} changeStatus={this.changeStatus} onSortEnd={this.onSortEnd} addStatus={this.addStatus} />
                 </div>
             </React.Fragment>
         )
