@@ -44,14 +44,14 @@ class ProjectComponent extends Component {
 
     }
     getAllUserProjects() {
-        axios.post(`${API_URL}/getProjectsByUser`, { login: localStorage.getItem('authenticatedUser') })
+        axios.post(`${API_URL}/projects/getProjectsByUser`, { login: sessionStorage.getItem('authenticatedUser') })
             .then(res => {
                 this.setState({ sta5rProjects: res.data });
                 this.setState({ projectsLoaded: true });
             })
     }
     changeProject = (uuid) => {
-        axios.post(`${API_URL}/getProject`, { uuid: uuid })
+        axios.post(`${API_URL}/projects/getProject`, { uuid: uuid })
             .then(res => {
                 this.setState({ star5ProjectStatues: res.data.statues });
                 this.setState({ uuid: res.data.uuid });
@@ -84,7 +84,7 @@ class ProjectComponent extends Component {
         statues[index].finish = finish;
         statues[index].skipped = skipped;
         this.setState({ star5ProjectStatues: statues });
-        axios.post(`${API_URL}/changeStatus`, { uuid: uuid, finish: finish, skipped: skipped })
+        axios.post(`${API_URL}/projects/changeStatus`, { uuid: uuid, finish: finish, skipped: skipped })
             .then(res => {
 
             })
@@ -120,9 +120,9 @@ class ProjectComponent extends Component {
     }
 
     createOrEditProject(name, number, url, uuid) {
-        axios.post(`${API_URL}/addNew5star`, {
+        axios.post(`${API_URL}/projects/addNew5star`, {
             name: name,
-            statues: this.state.star5ProjectStatues, uuid: this.state.uuid, contractNumber: number, url: url, userName: localStorage.getItem('authenticatedUser')
+            statues: this.state.star5ProjectStatues, uuid: this.state.uuid, contractNumber: number, url: url, userName: sessionStorage.getItem('authenticatedUser')
         })
             .then(res => {
                 if (res.data === true) {
@@ -149,7 +149,7 @@ class ProjectComponent extends Component {
 
 
     addNewProject(event) {
-        return axios.post(`${API_URL}/createNew5star`).then(res => {
+        return axios.post(`${API_URL}/projects/createNew5star`).then(res => {
             this.setState({ uuid: res.data.uuid });
             this.setState({ star5ProjectStatues: res.data.statues });
             $('#name').prop("disabled", false);
@@ -168,7 +168,7 @@ class ProjectComponent extends Component {
 
         const projects = this.state.sta5rProjects.filter(project => project.uuid !== uuid);
         this.setState({ sta5rProjects: projects });
-        axios.post(`${API_URL}/deleteProject`, { uuid: uuid })
+        axios.post(`${API_URL}/projects/deleteProject`, { uuid: uuid })
             .then(res => {
 
             })
@@ -185,7 +185,7 @@ class ProjectComponent extends Component {
             statues[i].orderPlace = i;
         }
 
-        axios.post(`${API_URL}/updateOrderPlaces`, statues)
+        axios.post(`${API_URL}/projects/updateOrderPlaces`, statues)
             .then(res => {
             })
         this.setState({ star5ProjectStatues: statues });
