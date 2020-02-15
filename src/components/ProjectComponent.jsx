@@ -38,9 +38,10 @@ class ProjectComponent extends Component {
         this.deleteProject = this.deleteProject.bind(this)
         this.onSortEnd = this.onSortEnd.bind(this)
         this.addStatus = this.addStatus.bind(this)
+        this.deleteStatus = this.deleteStatus.bind(this)
 
 
-
+        
 
     }
     getAllUserProjects() {
@@ -174,12 +175,22 @@ class ProjectComponent extends Component {
             })
     }
 
+    deleteStatus(uuid) {
+
+        const statues = this.state.star5ProjectStatues.filter(status => status.uuid !== uuid);
+        this.setState({ star5ProjectStatues: statues });
+        axios.post(`${API_URL}/projects/deleteStatus`, { uuid: uuid })
+            .then(res => {
+
+            })
+    }
+
     onSortEnd = ({ oldIndex, newIndex }) => {
         this.setState({ star5ProjectStatues: arrayMove(this.state.star5ProjectStatues, oldIndex, newIndex) })
         this.forceUpdate();
 
         var statues = this.state.star5ProjectStatues;
-        var orderPlaces = [];
+    
 
         for (var i = 0; i < this.state.star5ProjectStatues.length; i++) {
             statues[i].orderPlace = i;
@@ -210,7 +221,7 @@ class ProjectComponent extends Component {
                             <Sidebar projects={this.state.sta5rProjects} changeProject={this.changeProject} deleteProject={this.deleteProject} /> deleteProject
                         </div>
                     </div>
-                    <Content start5={this.state.star5ProjectStatues} logo={this.state.logoImage} saveProject={this.createOrEditProject} changeStatus={this.changeStatus} onSortEnd={this.onSortEnd} addStatus={this.addStatus} />
+                    <Content start5={this.state.star5ProjectStatues} logo={this.state.logoImage} saveProject={this.createOrEditProject} changeStatus={this.changeStatus} onSortEnd={this.onSortEnd} addStatus={this.addStatus}  deleteStatus={this.deleteStatus}/>
                 </div>
             </React.Fragment>
         )

@@ -6,7 +6,7 @@ import { sortableContainer, sortableElement } from 'react-sortable-hoc';
 
 const SortableStatuesContainer = sortableContainer(({ children }) => <div className="statues">{children}</div>);
 
-const SortableStatus = sortableElement(({ status, changeStatus, index }) => <StatusComponent index={index} key={status.orderPlace} status={status} changeStatus={changeStatus} />);
+const SortableStatus = sortableElement(({ status, changeStatus, deleteStatus, index }) => <StatusComponent index={index} key={status.orderPlace} status={status} changeStatus={changeStatus}  deleteStatus={deleteStatus}/>);
 
 
 
@@ -51,6 +51,7 @@ export default class Content extends Component {
                 index={status.orderPlace}
                 StatusComponent={status}
                 changeStatus={this.props.changeStatus}
+                deleteStatus={this.props.deleteStatus}
               />
             )}
           </SortableStatuesContainer>

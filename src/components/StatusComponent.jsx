@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import '../css/Login.css';
-import PropTypes from 'prop-types';
 
 
 class StatusComponent extends Component {
@@ -23,8 +22,12 @@ class StatusComponent extends Component {
     return (
       <div className="statusWrapper">
         <div id={this.props.status.uuid} key={this.props.status.name} className={(this.props.status.finish ? 'toDoLiDone' : this.props.status.skipped ? 'toDoLiSkipped' : 'toDoLi')}>
+        <div className="statusWrapper">
+        <div className="changeStatusWrapper">
+         <div>
           <span>numer: </span><span> {this.props.status.orderPlace}</span>
           <span> pominiety</span><span> {this.props.status.skipped.toString()}</span>
+          </div>
           {this.props.status.finish ? (
             <div>
               <button onClick={() => this.props.changeStatus(this.props.status.uuid, false, false)}>niezrobione</button>
@@ -35,9 +38,11 @@ class StatusComponent extends Component {
                 {this.props.status.skipped === false ? (<button onClick={() => this.props.changeStatus(this.props.status.uuid, false, true)}>pomiń</button>) : (<button onClick={() => this.props.changeStatus(this.props.status.uuid, false, false)}>do zrobienia</button>)}
               </div>
             )}
+            </div>
             <div>
-x
 
+<button onClick={() => this.props.deleteStatus(this.props.status.uuid)}>usuń</button>
+            </div>
             </div>
         </div>
       </div>
