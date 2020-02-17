@@ -78,11 +78,11 @@ function AddStatus(props) {
               <div>
                 <div>
                   <label htmlFor="1">Nazwa statusu</label>
-                  <input name="1"  />
+                  <input id="newStatusName" name="1"  />
                 </div>
                 <div>
                   <label htmlFor="2">Opis Statusu</label>
-                  <input name="2"  />
+                  <input id="newStatusNote" name="2"  />
                 </div>
               </div>
               <div>
@@ -136,7 +136,7 @@ function updateInputValue(saveProject) {
 }
 
 function addStatus(addStatus) {
-addStatus("1", "2");
+addStatus($('#newStatusName').val(), $('#newStatusNote').val());
 }
 
 
