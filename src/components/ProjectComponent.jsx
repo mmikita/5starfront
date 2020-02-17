@@ -105,8 +105,11 @@ class ProjectComponent extends Component {
         newStatus.name = name;
         newStatus.finish = false;
         newStatus.skipped = false;
-
         newStatus.statusNote = statusNote;
+        axios.post(`${API_URL}/projects/addStatus`, { name: name, statusNote: statusNote })
+        .then(res => {
+
+        })
       
 
 
