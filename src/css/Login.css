@@ -9,7 +9,6 @@ html {
 
 body {
     /* Remember to use the other versions for IE 10 and older browsers! */
-    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
