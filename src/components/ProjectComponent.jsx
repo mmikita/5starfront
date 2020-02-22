@@ -110,6 +110,7 @@ class ProjectComponent extends Component {
             .then(res => {
                 if (res.data === true) {
                     this.getAllUserProjects();
+                    this.changeProject(this.state.uuid);
                 } else {
                     const index = this.getIndex(this.state.uuid, this.state.sta5rProjects, "uuid");
                     var projects = this.state.sta5rProjects;
