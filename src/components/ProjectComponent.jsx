@@ -7,6 +7,7 @@ import Sidebar from './sidebar'
 import Content from './content.jsx'
 import $ from 'jquery';
 import arrayMove from 'array-move';
+import Popup from './PopupBaseProject.jsx';
 
 
 
@@ -26,6 +27,7 @@ class ProjectComponent extends Component {
             name: '',
             contractId: '',
             URL: '',
+            showPopup: false
 
         }
         this.getAllUserProjects();
@@ -39,9 +41,10 @@ class ProjectComponent extends Component {
         this.onSortEnd = this.onSortEnd.bind(this)
         this.addStatus = this.addStatus.bind(this)
         this.deleteStatus = this.deleteStatus.bind(this)
+        this.togglePopup = this.togglePopup.bind(this)
 
 
-        
+
 
     }
     getAllUserProjects() {
@@ -50,6 +53,11 @@ class ProjectComponent extends Component {
                 this.setState({ sta5rProjects: res.data });
                 this.setState({ projectsLoaded: true });
             })
+    }
+    togglePopup() {
+        this.setState({
+            showPopup: !this.state.showPopup
+        });
     }
     changeProject = (uuid) => {
         axios.post(`${API_URL}/projects/getProject`, { uuid: uuid })
@@ -107,10 +115,10 @@ class ProjectComponent extends Component {
         newStatus.skipped = false;
         newStatus.statusNote = statusNote;
         axios.post(`${API_URL}/projects/addStatus`, { uuid: this.state.uuid, name: name, statusNote: statusNote })
-        .then(res => {
+            .then(res => {
 
-        })
-      
+            })
+
 
 
         this.setState(previousState => ({
@@ -193,7 +201,7 @@ class ProjectComponent extends Component {
         this.forceUpdate();
 
         var statues = this.state.star5ProjectStatues;
-    
+
 
         for (var i = 0; i < this.state.star5ProjectStatues.length; i++) {
             statues[i].orderPlace = i;
@@ -213,7 +221,17 @@ class ProjectComponent extends Component {
                     <div onClick={this.addNewProject} className="star5">
                         {isUserLoggedIn && <UseAnimations animationKey="star" size={32} style={{ padding: 0 }} />}
                     </div>
-                    <div className="separator"></div>
+                    <div className="separator">
+                        <h3> Projekt bazowy </h3>
+                        <button onClick={this.togglePopup.bind(this)}>Edytuj</button>
+                        {this.state.showPopup ?
+                            <Popup
+                                text='Kliknij aby zamknąć'
+                                closePopup={this.togglePopup.bind(this)}
+                            />
+                            : null
+                        }
+                    </div>
                     <div className="login">
                         {isUserLoggedIn && <Link className="nav-link" to="/logout" onClick={AuthenticationService.logout}>Wyloguj</Link>}
                     </div>
@@ -224,7 +242,7 @@ class ProjectComponent extends Component {
                             <Sidebar projects={this.state.sta5rProjects} changeProject={this.changeProject} deleteProject={this.deleteProject} /> deleteProject
                         </div>
                     </div>
-                    <Content start5={this.state.star5ProjectStatues} logo={this.state.logoImage} saveProject={this.createOrEditProject} changeStatus={this.changeStatus} onSortEnd={this.onSortEnd} addStatus={this.addStatus}  deleteStatus={this.deleteStatus}/>
+                    <Content start5={this.state.star5ProjectStatues} logo={this.state.logoImage} saveProject={this.createOrEditProject} changeStatus={this.changeStatus} onSortEnd={this.onSortEnd} addStatus={this.addStatus} deleteStatus={this.deleteStatus} />
                 </div>
             </React.Fragment>
         )
