@@ -9,9 +9,6 @@ import $ from 'jquery';
 import arrayMove from 'array-move';
 import Popup from './PopupBaseProject.jsx';
 
-
-
-
 const API_URL = global.apiUrl
 
 class ProjectComponent extends Component {
@@ -27,7 +24,8 @@ class ProjectComponent extends Component {
             name: '',
             contractId: '',
             URL: '',
-            showPopup: false
+            showPopup: false,
+            currentStatus: ''
 
         }
         this.getAllUserProjects();
@@ -42,7 +40,7 @@ class ProjectComponent extends Component {
         this.addStatus = this.addStatus.bind(this)
         this.deleteStatus = this.deleteStatus.bind(this)
         this.togglePopup = this.togglePopup.bind(this)
-
+ 
 
 
 
@@ -108,24 +106,26 @@ class ProjectComponent extends Component {
     }
 
     addStatus(name, statusNote) {
-        var newStatus = [];
-        newStatus.orderPlace = this.state.star5ProjectStatues.length;
+        var newStatus = {};
         newStatus.name = name;
-        newStatus.finish = false;
-        newStatus.skipped = false;
         newStatus.statusNote = statusNote;
+        newStatus.finish = false;
+        newStatus.orderPlace = this.state.star5ProjectStatues.length;
+
+    
+        newStatus.skipped = false;
+  
         axios.post(`${API_URL}/projects/addStatus`, { uuid: this.state.uuid, name: name, statusNote: statusNote })
             .then(res => {
+                newStatus.uuid = res.data;
+                this.setState(previousState => ({
+                    star5ProjectStatues: [...previousState.star5ProjectStatues, newStatus]
+                }));
+                console.log(this.state.star5ProjectStatues);
+
 
             })
-
-
-
-        this.setState(previousState => ({
-            star5ProjectStatues: [...previousState.star5ProjectStatues, newStatus]
-        }));
-        console.log(this.state.star5ProjectStatues);
-
+          
 
 
 
@@ -187,26 +187,24 @@ class ProjectComponent extends Component {
     }
 
     deleteStatus(uuid) {
-
         const statues = this.state.star5ProjectStatues.filter(status => status.uuid !== uuid);
         this.setState({ star5ProjectStatues: statues });
-        axios.post(`${API_URL}/projects/deleteStatus`, { uuid: uuid })
+        axios.post(`${API_URL}/projects/deleteStatus`, { uuid: uuid, projectUuid: this.state.uuid})
             .then(res => {
-
+                for (var i = 0; i < this.state.star5ProjectStatues.length; i++) {
+                    statues[i].orderPlace = i;
+                }
+                this.setState({ star5ProjectStatues: statues });
             })
     }
 
     onSortEnd = ({ oldIndex, newIndex }) => {
         this.setState({ star5ProjectStatues: arrayMove(this.state.star5ProjectStatues, oldIndex, newIndex) })
         this.forceUpdate();
-
         var statues = this.state.star5ProjectStatues;
-
-
         for (var i = 0; i < this.state.star5ProjectStatues.length; i++) {
             statues[i].orderPlace = i;
         }
-
         axios.post(`${API_URL}/projects/updateOrderPlaces`, statues)
             .then(res => {
             })
