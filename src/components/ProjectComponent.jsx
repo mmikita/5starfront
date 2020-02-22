@@ -10,9 +10,7 @@ import arrayMove from 'array-move';
 import Popup from './PopupBaseProject.jsx';
 
 const API_URL = global.apiUrl
-
 class ProjectComponent extends Component {
-
     constructor(props) {
         super(props)
         this.state = {
@@ -26,7 +24,6 @@ class ProjectComponent extends Component {
             URL: '',
             showPopup: false,
             currentStatus: ''
-
         }
         this.getAllUserProjects();
         this.addNewProject = this.addNewProject.bind(this)
@@ -40,10 +37,6 @@ class ProjectComponent extends Component {
         this.addStatus = this.addStatus.bind(this)
         this.deleteStatus = this.deleteStatus.bind(this)
         this.togglePopup = this.togglePopup.bind(this)
- 
-
-
-
     }
     getAllUserProjects() {
         axios.post(`${API_URL}/projects/getProjectsByUser`, { login: sessionStorage.getItem('authenticatedUser') })
@@ -71,15 +64,9 @@ class ProjectComponent extends Component {
                 $('#contractId').prop("disabled", true);
                 $('#save').text('Edytuj');
                 $("#statuesList").removeClass("disableStatues");
-
-
-
             })
-
-
     }
     changeStatus = (uuid, finish, skipped) => {
-    
         const index = this.getIndex(uuid, this.state.star5ProjectStatues, "uuid");
         var statues = this.state.star5ProjectStatues;
         statues[index].finish = finish;
@@ -98,7 +85,6 @@ class ProjectComponent extends Component {
         }
         return -1;
     }
-
     addStatus(name, statusNote) {
         var newStatus = {};
         newStatus.name = name;
@@ -106,7 +92,6 @@ class ProjectComponent extends Component {
         newStatus.finish = false;
         newStatus.orderPlace = this.state.star5ProjectStatues.length;
         newStatus.skipped = false;
-  
         axios.post(`${API_URL}/projects/addStatus`, { uuid: this.state.uuid, name: name, statusNote: statusNote })
             .then(res => {
                 newStatus.uuid = res.data;
@@ -117,7 +102,6 @@ class ProjectComponent extends Component {
             })
             this.forceUpdate();
     }
-
     createOrEditProject(name, number, url, uuid) {
         axios.post(`${API_URL}/projects/addNew5star`, {
             name: name,
@@ -135,7 +119,6 @@ class ProjectComponent extends Component {
             }
             )
     }
-
     handleChange(event) {
         this.setState(
             {
@@ -148,7 +131,7 @@ class ProjectComponent extends Component {
 
 
     addNewProject(event) {
-        return axios.post(`${API_URL}/projects/createNew5star`).then(res => {
+        return axios.post(`${API_URL}/projects/createNew5star`, {userName: sessionStorage.getItem('authenticatedUser')}).then(res => {
             this.setState({ uuid: res.data.uuid });
             this.setState({ star5ProjectStatues: res.data.statues });
             $('#name').prop("disabled", false);
@@ -234,5 +217,4 @@ class ProjectComponent extends Component {
         )
     }
 }
-
 export default withRouter(ProjectComponent)
