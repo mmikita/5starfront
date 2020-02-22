@@ -79,13 +79,7 @@ class ProjectComponent extends Component {
 
     }
     changeStatus = (uuid, finish, skipped) => {
-        if (finish === true) {
-            $("#" + uuid).css("background-color", "green");
-        } else if (skipped === true) {
-            $("#" + uuid).css("background-color", "gray");
-        } else if (finish === false) {
-            $("#" + uuid).css("background-color", "black");
-        }
+    
         const index = this.getIndex(uuid, this.state.star5ProjectStatues, "uuid");
         var statues = this.state.star5ProjectStatues;
         statues[index].finish = finish;
@@ -111,8 +105,6 @@ class ProjectComponent extends Component {
         newStatus.statusNote = statusNote;
         newStatus.finish = false;
         newStatus.orderPlace = this.state.star5ProjectStatues.length;
-
-    
         newStatus.skipped = false;
   
         axios.post(`${API_URL}/projects/addStatus`, { uuid: this.state.uuid, name: name, statusNote: statusNote })
@@ -122,13 +114,8 @@ class ProjectComponent extends Component {
                     star5ProjectStatues: [...previousState.star5ProjectStatues, newStatus]
                 }));
                 console.log(this.state.star5ProjectStatues);
-
-
             })
-          
-
-
-
+            this.forceUpdate();
     }
 
     createOrEditProject(name, number, url, uuid) {
@@ -199,6 +186,7 @@ class ProjectComponent extends Component {
     }
 
     onSortEnd = ({ oldIndex, newIndex }) => {
+        console.log("oldindex  "+oldIndex+ " newIndex: " + newIndex);
         this.setState({ star5ProjectStatues: arrayMove(this.state.star5ProjectStatues, oldIndex, newIndex) })
         this.forceUpdate();
         var statues = this.state.star5ProjectStatues;
