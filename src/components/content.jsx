@@ -8,9 +8,6 @@ const SortableStatuesContainer = sortableContainer(({ children }) => <div classN
 
 const SortableStatus = sortableElement(({ status, changeStatus, deleteStatus, index }) => <StatusComponent index={index} key={status.orderPlace} status={status} changeStatus={changeStatus}  deleteStatus={deleteStatus}/>);
 
-
-
-
 export default class Content extends Component {
   constructor(props) {
     super(props)
@@ -21,7 +18,6 @@ export default class Content extends Component {
       contractId: "",
       saveProject: props.saveProject,
     }
-
   }
 
   handleChange(event) {
@@ -34,9 +30,9 @@ export default class Content extends Component {
   }
   render() {
     let projectName;
-    if (this.props.start5.length !== 0) {
+  
       projectName = <ProjectForm saveProject={this.state.saveProject} />
-    }
+  
     return( <div className="content-container">
       <img className={this.props.logo} src={logo} alt="Logo" />
       <div className="project">
@@ -44,7 +40,7 @@ export default class Content extends Component {
         <div id="statuesList" className="disableStatues">
           <SortableStatuesContainer axis='y' revert='true' scroll='false' placeholder="sortable-placeholder" cursor="move"
             onSortEnd={this.props.onSortEnd}>
-            {this.props.start5.map((status) =>
+            {this.props.start5 !== undefined ? this.props.start5.map((status) =>
               <SortableStatus
                 key={status.orderPlace}
                 status={status}
@@ -53,23 +49,16 @@ export default class Content extends Component {
                 changeStatus={this.props.changeStatus}
                 deleteStatus={this.props.deleteStatus}
               />
-            )}
+            
+            ):('')}
           </SortableStatuesContainer>
-          {this.props.start5.length !== 0 ?  <AddStatus addStatus={this.props.addStatus} /> : ""}  
-
+           <AddStatus addStatus={this.props.addStatus} /> 
         </div>
       </div>
     </div>
             )
-        
-
-
   }
- 
-
 }
-
-
 function AddStatus(props) {
   return (
     <div className="addStatus">
