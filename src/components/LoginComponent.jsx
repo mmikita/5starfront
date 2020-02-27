@@ -10,7 +10,7 @@ class LoginComponent extends Component {
         super(props)
 
         this.state = {
-            username: 'in28minutes',
+            username: '',
             password: '',
             hasLoginFailed: false,
             showSuccessMessage: false
@@ -61,11 +61,11 @@ class LoginComponent extends Component {
                         <div className="form-field">
 
                             <label className="user" htmlFor="login-username"><span className="hidden">Login</span></label>
-                            <input id="login-username" type="text" className="form-input" placeholder="Login" name="username" value={this.state.username} onChange={this.handleChange} required />
+                            <input id="login-username" type="text" className="form-input"  name="username" value={this.state.username} onChange={this.handleChange} required />
                         </div>
                         <div className="form-field">
                             <label className="lock" htmlFor="login-password"><span className="hidden">Hasło</span></label>
-                            <input id="login-password" type="password" className="form-input" placeholder="Hasło" name="password" value={this.state.password} onChange={this.handleChange} onKeyPress={this.enterPressed.bind(this)} required />
+                            <input id="login-password" type="password" className="form-input"  name="password" value={this.state.password} onChange={this.handleChange} onKeyPress={this.enterPressed.bind(this)} required />
                         </div>
                         <div className="row form-field loginbutton">
                             <button className="btn btn-success" onClick={this.loginClicked}>Zaloguj</button>

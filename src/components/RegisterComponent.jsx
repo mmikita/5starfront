@@ -83,19 +83,19 @@ setRegisterError(){
                         <div className="form-field">
 
                             <label className="user" htmlFor="login-username"><span className="hidden">Login</span></label>
-                            <input id="login-username" type="text" className="form-input" placeholder="Login" name="username" value={this.state.username} onChange={this.handleChange} required />
+                            <input id="login-username" type="text" className="form-input"  name="username" value={this.state.username} onChange={this.handleChange} required />
                         </div>
                         <div className="form-field">
                             <label className="lock" htmlFor="login-password"><span className="hidden">Hasło</span></label>
-                            <input id="login-password" type="password" className="form-input" placeholder="Hasło" name="password" value={this.state.password} onChange={this.handleChange} required />
+                            <input id="login-password" type="password" className="form-input"  name="password" value={this.state.password} onChange={this.handleChange} required />
                         </div>
                         <div className="form-field">
                             <label className="lock" htmlFor="login-repeatPassword"><span className="hidden">Powtórz hasło</span></label>
-                            <input id="login-repeatPassword" type="password" className="form-input" placeholder="Powtórz hasło" name="repeatPassword" value={this.state.repeatPassword} onChange={this.handleChange} required />
+                            <input id="login-repeatPassword" type="password" className="form-input"  name="repeatPassword" value={this.state.repeatPassword} onChange={this.handleChange} required />
                         </div>
                                <div className="form-field">
                             <label className="lock" htmlFor="login-hiddenPassword"><span className="hidden">Tajne hasło</span></label>
-                            <input id="login-hiddenPassword" type="password" className="form-input" placeholder="Tajne hasło" name="hiddenPassword" value={this.state.hiddenPassword} 
+                            <input id="login-hiddenPassword" type="password" className="form-input" name="hiddenPassword" value={this.state.hiddenPassword} 
                             onChange={this.handleChange}  onKeyPress={this.enterPressed.bind(this)} required />
                         </div>
 

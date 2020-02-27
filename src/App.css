@@ -32,16 +32,8 @@ margin: 0 auto;
 .loginPanel input {
   display: inline-block;
 }
-.loginPanel label {
-  display: inline-block;
-  float: left;
-  clear: left;
-  width: 100px;
- 
-}
-.loginPanel .button{
-text-align: right;
-}
+
+
 
 #root{
 width: 100%;
@@ -58,10 +50,13 @@ height: 100%;
   margin: 0 auto;
    width: 100%;
   overflow: auto;
-  background-color: #394f5a;
+  
 }
 
+.toDoLi,.toDoLiSkipped,.toDoLiDone{
+border-radius: 20px;
 
+}
 .toDoLi{
 background-color: black;
 margin-top: 5px;
@@ -115,7 +110,6 @@ width: 80%;
 
 
 
-
 h1 {
   margin: 0;
   padding: 0;
@@ -150,8 +144,11 @@ html, body, .app {
   background: white;  
 }
 
-
-
+.loginContainer{
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
 
 
 
@@ -244,8 +241,6 @@ ul{
     text-align: center;
   }
 
-
-
 .register{
 position: absolute;
 bottom: 0;
@@ -254,16 +249,11 @@ padding: 5px;
 
 }
 
-
 .separator{
   flex-grow:1;
 }
 
 
-
-.star5{
-
-}
 
 .logo{
     font-family: "museo-slab";  
@@ -274,10 +264,16 @@ padding: 5px;
   }
 
 .form-field{
-padding: 5px 0;
 
+  
+    text-align: center;
+  
+   
 }
-label{
-padding-right: 5px;
 
+
+.form-field label{
+  text-align: center;
 }
+
+

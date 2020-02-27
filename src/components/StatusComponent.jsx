@@ -44,6 +44,10 @@ class StatusComponent extends Component {
 <button onClick={() => this.props.deleteStatus(this.props.status.uuid)}>usuń</button>
             </div>
             </div>
+            <div className="statusNore">
+<textarea></textarea>
+
+            </div>
         </div>
       </div>
     )

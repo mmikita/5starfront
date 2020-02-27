@@ -1,9 +1,7 @@
 @import url('https://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css');
 @import url(https://fonts.googleapis.com/css?family=Lato:400,300,700);
 
-html {
-   height: 100vh;
-}
+
 
 
 
@@ -26,24 +24,9 @@ header{
   background:rgba(58,63,68,0.5);
   align-items:center;
   padding: 5px;
+}
 
 
-}
-.loginPanel{
-  background:
-  #222222;
-  
-  padding: 10px;
-  
-  border-radius: 10px;
-}
-.logoimg{
-
-  
-}
-.separator{
-  flex-grow:1;
-}
 
 
 .login{
@@ -55,9 +38,6 @@ header{
   padding-right: 10px;
 }
 
-.star5{
-
-}
 
 .logo{
     font-family: "museo-slab";  
@@ -76,8 +56,46 @@ padding-right: 5px;
 
 }
 
-.statusWrapper{
-
-  border-top: 1px solid black;
-
+button {
+	display: block;
+  margin: 0 auto;
+  margin-bottom: 0;
+  overflow: hidden;
+  position: relative;
+  transform: translatez(0);
+  text-decoration: none;
+  box-sizing: border-box;
+  font-size: 20px;
+	font-weight: normal;
+  box-shadow: 0 9px 18px rgba(0,0,0,0.2);
+  text-align: center;
+	border-radius: 50px;
+  padding: 26px;
+  color: white;
+  background: green;
+  transition: all 0.2s ease-out 0s;
 }
+button:hover {
+  background: #14c2e7;
+  cursor:pointer;
+}
+
+input {
+	position:relative;
+	font-size: 1.5em;
+	background: linear-gradient(21deg, #10abff, #1beabd);
+	display: inline-block;
+  border-radius: 9999em;
+  font-family: inherit;
+	line-height:inherit;
+	color:#2e3750;
+  width: 100%;
+  }
+  label{
+  font-size: 25px;
+  padding-bottom: 10px;
+  color: #14c2e7;
+}
+
+.loginPanel .logo{font-size: 35px; color: green;}
+.form-input{margin-top: 5px;}
