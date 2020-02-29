@@ -100,7 +100,7 @@ class ProjectComponent extends Component {
                 }));
                 console.log(this.state.star5ProjectStatues);
             })
-            this.forceUpdate();
+        this.forceUpdate();
     }
     createOrEditProject(name, number, url, uuid) {
         axios.post(`${API_URL}/projects/addNew5star`, {
@@ -128,11 +128,8 @@ class ProjectComponent extends Component {
             }
         )
     }
-
-
-
     addNewProject(event) {
-        return axios.post(`${API_URL}/projects/createNew5star`, {userName: sessionStorage.getItem('authenticatedUser')}).then(res => {
+        return axios.post(`${API_URL}/projects/createNew5star`, { userName: sessionStorage.getItem('authenticatedUser') }).then(res => {
             this.setState({ uuid: res.data.uuid });
             this.setState({ star5ProjectStatues: res.data.statues });
             $('#name').prop("disabled", false);
@@ -148,19 +145,17 @@ class ProjectComponent extends Component {
     }
 
     deleteProject(uuid) {
-
         const projects = this.state.sta5rProjects.filter(project => project.uuid !== uuid);
         this.setState({ sta5rProjects: projects });
         axios.post(`${API_URL}/projects/deleteProject`, { uuid: uuid })
             .then(res => {
-
             })
     }
 
     deleteStatus(uuid) {
         const statues = this.state.star5ProjectStatues.filter(status => status.uuid !== uuid);
         this.setState({ star5ProjectStatues: statues });
-        axios.post(`${API_URL}/projects/deleteStatus`, { uuid: uuid, projectUuid: this.state.uuid})
+        axios.post(`${API_URL}/projects/deleteStatus`, { uuid: uuid, projectUuid: this.state.uuid })
             .then(res => {
                 for (var i = 0; i < this.state.star5ProjectStatues.length; i++) {
                     statues[i].orderPlace = i;
@@ -170,7 +165,7 @@ class ProjectComponent extends Component {
     }
 
     onSortEnd = ({ oldIndex, newIndex }) => {
-        console.log("oldindex  "+oldIndex+ " newIndex: " + newIndex);
+        console.log("oldindex  " + oldIndex + " newIndex: " + newIndex);
         this.setState({ star5ProjectStatues: arrayMove(this.state.star5ProjectStatues, oldIndex, newIndex) })
         this.forceUpdate();
         var statues = this.state.star5ProjectStatues;
@@ -189,11 +184,10 @@ class ProjectComponent extends Component {
             <React.Fragment>
                 <header>
                     <div onClick={this.addNewProject} className="star5">
-                        {isUserLoggedIn && <UseAnimations animationKey="star" size={32} style={{ padding: 0 }} />}
+                        {isUserLoggedIn && <UseAnimations animationKey="download" size={38} style={{ cursor: "pointer", padding: 10 }} />}
+                        <h3>Nowy projekt</h3>
                     </div>
-                    <div className="separator">
-                        <h3> Projekt bazowy </h3>
-                        <button onClick={this.togglePopup.bind(this)}>Edytuj</button>
+                    <div className="baseProject">
                         {this.state.showPopup ?
                             <Popup
                                 text='Kliknij aby zamknąć'
@@ -201,6 +195,9 @@ class ProjectComponent extends Component {
                             />
                             : null
                         }
+                        {isUserLoggedIn && <UseAnimations animationKey="settings" size={38} style={{ cursor: "pointer", padding: 10 }} />}
+                        <button onClick={this.togglePopup.bind(this)}>Edytuj</button>
+                        <h3> Projekt bazowy </h3>
                     </div>
                     <div className="login">
                         {isUserLoggedIn && <Link className="nav-link" to="/logout" onClick={AuthenticationService.logout}>Wyloguj</Link>}
@@ -209,7 +206,7 @@ class ProjectComponent extends Component {
                 <div className="content">
                     <div>
                         <div>
-                            <Sidebar projects={this.state.sta5rProjects} changeProject={this.changeProject} deleteProject={this.deleteProject} /> deleteProject
+                            <Sidebar projects={this.state.sta5rProjects} changeProject={this.changeProject} deleteProject={this.deleteProject} />
                         </div>
                     </div>
                     <Content start5={this.state.star5ProjectStatues} logo={this.state.logoImage} saveProject={this.createOrEditProject} changeStatus={this.changeStatus} onSortEnd={this.onSortEnd} addStatus={this.addStatus} deleteStatus={this.deleteStatus} />

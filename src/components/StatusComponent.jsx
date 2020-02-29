@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import '../css/Login.css';
 
 
 class StatusComponent extends Component {
