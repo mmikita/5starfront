@@ -356,10 +356,11 @@ padding: 5px;
 .baseProject{
   flex-grow:1;
 }
-.baseProject > div{
+.baseProject > div > div{
   margin: 0 auto;
-}
 
+}
+.baseProject:hover{}
 
 
 .logo{
@@ -379,4 +380,4 @@ padding: 5px;
   text-align: center;
 }
 
-
+.nav-link{font-size: 20px;}

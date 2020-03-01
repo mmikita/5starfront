@@ -17,44 +17,8 @@ export default class Sidebar extends Component {
 
     return <div className="sidebar">
       <form>
-        <input
+        <input id="projectInputFilter" onChange={() => this.props.filterProjects()}
           placeholder="Wyszukaj projekt... "/>
-        <p>Status:</p>
-        <ul>
-          <li>
-            <label>
-              <input
-                name="status"
-                type="radio"
-              /*
-              checked={this.state.size === "small"}
-              onChange={this.handleChange}*/
-              />
-              Wszystkie
-          </label>
-          </li>
-
-          <li>
-            <label>
-              <input
-                name="status"
-                type="radio"
-              />
-              W trakcie
-          </label>
-          </li>
-
-          <li>
-            <label>
-              <input
-                name="status"
-                type="radio"
-              /* value="large" */
-              />
-              Zakończone
-          </label>
-          </li>
-        </ul>
         <div>
           <p>Sortuj po...</p>
           <select name="cars">
@@ -68,8 +32,8 @@ export default class Sidebar extends Component {
           return <div key={project.uuid} className="projectOnList">
             <div className="projectName" onClick={() => this.props.changeProject(project.uuid)}>
             <span>{project.name}</span>
-            <span>i</span>
-            <span>...</span>
+            <span></span>
+            <span></span>
             </div>
             <button onClick={() =>  window.confirm("Na pewno usuwamy?") && this.props.deleteProject(project.uuid)}>usuń</button>
           </div>

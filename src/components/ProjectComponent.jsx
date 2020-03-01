@@ -16,6 +16,7 @@ class ProjectComponent extends Component {
         this.state = {
             projectsLoaded: false,
             sta5rProjects: [],
+            allProjects: [],
             star5ProjectStatues: [],
             logoImage: 'logoimgwith5star',
             uuid: '',
@@ -37,12 +38,15 @@ class ProjectComponent extends Component {
         this.addStatus = this.addStatus.bind(this)
         this.deleteStatus = this.deleteStatus.bind(this)
         this.togglePopup = this.togglePopup.bind(this)
+        this.filterProjects = this.filterProjects.bind(this)
+
+        
     }
     getAllUserProjects() {
         axios.post(`${API_URL}/projects/getProjectsByUser`, { login: sessionStorage.getItem('authenticatedUser') })
             .then(res => {
                 this.setState({ sta5rProjects: res.data });
-                this.setState({ projectsLoaded: true });
+                this.setState({ allProjects: res.data });
             })
     }
     togglePopup() {
@@ -164,6 +168,12 @@ class ProjectComponent extends Component {
             })
     }
 
+    filterProjects() {
+        var allProjects = this.state.allProjects.filter(project => project.name.includes($('#projectInputFilter').val()))
+        this.setState({ sta5rProjects: allProjects });
+
+    }
+
     onSortEnd = ({ oldIndex, newIndex }) => {
         console.log("oldindex  " + oldIndex + " newIndex: " + newIndex);
         this.setState({ star5ProjectStatues: arrayMove(this.state.star5ProjectStatues, oldIndex, newIndex) })
@@ -194,10 +204,11 @@ class ProjectComponent extends Component {
                                 closePopup={this.togglePopup.bind(this)}
                             />
                             : null
-                        }
-                        {isUserLoggedIn && <UseAnimations animationKey="settings" size={38} style={{ cursor: "pointer", padding: 10 }} />}
-                        <button onClick={this.togglePopup.bind(this)}>Edytuj</button>
+                        }<div onClick={this.togglePopup.bind(this)}>
+                         <UseAnimations animationKey="settings" size={38} style={{ cursor: "pointer", padding: 10 }} />
+                       
                         <h3> Projekt bazowy </h3>
+                        </div>
                     </div>
                     <div className="login">
                         {isUserLoggedIn && <Link className="nav-link" to="/logout" onClick={AuthenticationService.logout}>Wyloguj</Link>}
@@ -206,7 +217,7 @@ class ProjectComponent extends Component {
                 <div className="content">
                     <div>
                         <div>
-                            <Sidebar projects={this.state.sta5rProjects} changeProject={this.changeProject} deleteProject={this.deleteProject} />
+                            <Sidebar filterProjects={this.filterProjects} projects={this.state.sta5rProjects} changeProject={this.changeProject} deleteProject={this.deleteProject} />
                         </div>
                     </div>
                     <Content start5={this.state.star5ProjectStatues} logo={this.state.logoImage} saveProject={this.createOrEditProject} changeStatus={this.changeStatus} onSortEnd={this.onSortEnd} addStatus={this.addStatus} deleteStatus={this.deleteStatus} />
