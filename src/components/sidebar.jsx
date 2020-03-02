@@ -19,19 +19,12 @@ export default class Sidebar extends Component {
       <form>
         <input id="projectInputFilter" onChange={() => this.props.filterProjects()}
           placeholder="Wyszukaj projekt... "/>
-        <div>
-          <p>Sortuj po...</p>
-          <select name="cars">
-            <option value="date">dacie dodania</option>
-            <option value="name">nazwie</option>
-          </select>
-        </div>
       </form>
       <div className="projectList">
       {this.props.projects.map((project) => {
           return <div key={project.uuid} className="projectOnList">
             <div className="projectName" onClick={() => this.props.changeProject(project.uuid)}>
-            <span>{project.name}</span>
+            <h4>{project.name}</h4>
             <span></span>
             <span></span>
             </div>
