@@ -28,7 +28,7 @@ export default class Sidebar extends Component {
             <span></span>
             <span></span>
             </div>
-            <button onClick={() =>  window.confirm("Na pewno usuwamy?") && this.props.deleteProject(project.uuid)}>usuń</button>
+            <button className="deleteButton" onClick={() =>  window.confirm("Na pewno usuwamy?") && this.props.deleteProject(project.uuid)}>usuń</button>
           </div>    </div>
         })}
       </div>
