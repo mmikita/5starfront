@@ -217,7 +217,7 @@ class ProjectComponent extends Component {
                 <div className="content">
                     <div>
                         <div>
-                            <Sidebar filterProjects={this.filterProjects} projects={this.state.sta5rProjects} changeProject={this.changeProject} deleteProject={this.deleteProject} />
+                            <Sidebar  selectedProject={this.state.uuid} filterProjects={this.filterProjects} projects={this.state.sta5rProjects} changeProject={this.changeProject} deleteProject={this.deleteProject} />
                         </div>
                     </div>
                     <Content start5={this.state.star5ProjectStatues} logo={this.state.logoImage} saveProject={this.createOrEditProject} changeStatus={this.changeStatus} onSortEnd={this.onSortEnd} addStatus={this.addStatus} deleteStatus={this.deleteStatus} />
