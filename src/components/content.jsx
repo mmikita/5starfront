@@ -52,8 +52,9 @@ export default class Content extends Component {
             
             ):('')}
           </SortableStatuesContainer>
-           <AddStatus addStatus={this.props.addStatus} /> 
+      
         </div>
+        <AddStatus addStatus={this.props.addStatus} /> 
       </div>
     </div>
             )

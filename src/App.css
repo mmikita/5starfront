@@ -50,6 +50,7 @@ height: 100%;
   margin: 0 auto;
    width: 100%;
   overflow: auto;
+  overflow: hidden;
   
 }
 
@@ -113,12 +114,12 @@ h1 {
   padding: 0;
 }
 html, body, .app {
-  overflow: hidden;
+ 
   margin: 0;
   padding: 0;
   position: relative;
   width: 100%;
-  height: 100vh;
+
 }
 .popup {  
   position: fixed;  
@@ -155,7 +156,7 @@ h3{margin-top: 0; margin-bottom: 0;}
 
 div.star5 > div{margin: 0 auto;}
 
-
+.statues{max-height: 600px;}
 
 
 
@@ -266,9 +267,11 @@ button{  outline: none;
 
 
 
-.deleteButton{background: rgb(223, 117, 20); color: white;
+.deleteButton{background: royalblue; color: white;
   border-radius: 4px;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);}
+
+  #root > div > div > div.content-container > div > div.projectData > div > form > div > div > label{width: 100px;}
 
 
 
@@ -330,10 +333,9 @@ a {
 border-right: 5px solid dimgray;
 background-color: gainsboro;
 }
-.sidebar-container{
-  min-height: 100vh;
-}
 
+.sidebar-container {
+  min-height: auto;}
 
  
 ul{
@@ -410,7 +412,7 @@ input#projectInputFilter {
   input#projectInputFilter::placeholder {
     color: #000;
     }
-.projectList{    padding-top: 60px; height: 600px; overflow: auto;}
+.projectList{    margin-top: 60px; height: 600px; overflow: auto;}
 .projectName{cursor:pointer;}
 .projectName button{cursor:pointer;}
 .projectList h4{margin-bottom: 0; margin-top: 5px;}
