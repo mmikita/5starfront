@@ -113,6 +113,7 @@ h1 {
   padding: 0;
 }
 html, body, .app {
+  overflow: hidden;
   margin: 0;
   padding: 0;
   position: relative;

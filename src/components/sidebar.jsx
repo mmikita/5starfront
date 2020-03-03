@@ -22,14 +22,14 @@ export default class Sidebar extends Component {
       </form>
       <div className="projectList">
       {this.props.projects.map((project) => {
-          return< div  key={project.uuid} className={(this.props.selectedProject===project.uuid ? 'selectedProject' :'')}>  <div className="projectOnList">
-            <div className="projectName" onClick={() => this.props.changeProject(project.uuid)}>
+          return< div  key={project.uuid} onClick={() => this.props.changeProject(project.uuid)} className={(this.props.selectedProject===project.uuid ? 'selectedProject' :'')}>  <div className="projectOnList">
+            <div className="projectName" >
             <h4>{project.name}</h4>
             <span></span>
             <span></span>
-            </div>
+            
             <button className="deleteButton" onClick={() =>  window.confirm("Na pewno usuwamy?") && this.props.deleteProject(project.uuid)}>usuń</button>
-          </div>    </div>
+          </div>    </div></div>
         })}
       </div>
     </div>     
