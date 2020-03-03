@@ -22,7 +22,7 @@ export default class Sidebar extends Component {
       </form>
       <div className="projectList">
       {this.props.projects.map((project) => {
-          return< div className={(this.props.selectedProject===project.uuid ? 'selectedProject' :'')}>  <div key={project.uuid} className="projectOnList">
+          return< div  key={project.uuid} className={(this.props.selectedProject===project.uuid ? 'selectedProject' :'')}>  <div className="projectOnList">
             <div className="projectName" onClick={() => this.props.changeProject(project.uuid)}>
             <h4>{project.name}</h4>
             <span></span>
