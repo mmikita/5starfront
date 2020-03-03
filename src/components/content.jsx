@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import logo from '../resources/img/5StarWeb_logo.png'
 import $ from 'jquery';
 import StatusComponent from './StatusComponent.jsx';
 import { sortableContainer, sortableElement } from 'react-sortable-hoc';
@@ -34,7 +33,7 @@ export default class Content extends Component {
       projectName = <ProjectForm saveProject={this.state.saveProject} />
   
     return( <div className="content-container">
-      <img className={this.props.logo} src={logo} alt="Logo" />
+      
       <div className="project">
         {projectName}
         <div id="statuesList" className="disableStatues">

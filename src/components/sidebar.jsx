@@ -20,6 +20,7 @@ export default class Sidebar extends Component {
         <input id="projectInputFilter" onChange={() => this.props.filterProjects()}
           placeholder="Wyszukaj projekt... "/>
       </form>
+      <div className="projectListWrapper">
       <div className="projectList">
       {this.props.projects.map((project) => {
           return< div  key={project.uuid} onClick={() => this.props.changeProject(project.uuid)} className={(this.props.selectedProject===project.uuid ? 'selectedProject' :'')}>  <div className="projectOnList">
@@ -33,7 +34,7 @@ export default class Sidebar extends Component {
         })}
       </div>
     </div>     
-
+    </div>
   }
 
  

@@ -12,7 +12,7 @@ display: block;
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  
   display: block;
   flex-direction: column;
   align-items: center;
@@ -92,7 +92,7 @@ text-align: right;
 position: relative;
 }
 div.sidebar-icon{
-  padding-top: 10px;
+  padding: 10px;
   }
 
 #statuesList{
@@ -114,7 +114,7 @@ h1 {
   padding: 0;
 }
 html, body, .app {
- 
+  height: 100%;
   margin: 0;
   padding: 0;
   position: relative;
@@ -315,7 +315,7 @@ a {
 }
 .content{
   display: flex;
-
+padding-bottom: 20px;
 }
 
 
@@ -334,8 +334,6 @@ border-right: 5px solid dimgray;
 background-color: gainsboro;
 }
 
-.sidebar-container {
-  min-height: auto;}
 
  
 ul{
@@ -412,10 +410,16 @@ input#projectInputFilter {
   input#projectInputFilter::placeholder {
     color: #000;
     }
-.projectList{    margin-top: 60px; height: 600px; overflow: auto;}
+.projectList{    margin-top: 60px; max-height: 600px; overflow: auto;}
 .projectName{cursor:pointer;}
 .projectName button{cursor:pointer;}
 .projectList h4{margin-bottom: 0; margin-top: 5px;}
 .selectedProject{padding: 2px;
-  background-color: royalblue;
+background-color: royalblue;
   border-radius: 20px;}
+
+  .sidebar-container{
+    border-radius: 5px;
+    border: 4px solid royalblue;
+    background-color: gray;
+  }
