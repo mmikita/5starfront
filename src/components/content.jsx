@@ -86,22 +86,27 @@ function ProjectForm(props) {
   return (
     <div className="projectData">
       <div>
-        <form>
+       
           <div>
             <div>
+              <div>
               <label htmlFor="name">Nazwa projektu</label>
+              </div>
+              <div>
               <input name="name" id="name" />
+              </div>
             </div> <div>
-              <label htmlFor="contractId">Nr umowy</label>
-              <input name="contractId" id="contractId" />
+            <div> 
+              <label htmlFor="contractId">Nr umowy</label></div>
+              <div>  <input name="contractId" id="contractId" /></div>
             </div> <div>
-              <label htmlFor="url">URL</label>
-              <input name="URL" id="URL" />
+            <div>  <label htmlFor="url">URL</label></div>
+            <div>     <input name="URL" id="URL" /></div>
             </div>
           </div>
           <div className="saveEditbutton">
             <button type="button" id="save" onClick={() => updateInputValue(props.saveProject)}>Zapisz</button>          </div>
-        </form>
+      
       </div>
     </div>
   );

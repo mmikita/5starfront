@@ -42,6 +42,7 @@ height: 100%;
 .content-container{
   margin: 0 auto;
   height: 100%;
+  flex: auto;
 }
 .logoimgwith5star{
   width: 20%;
@@ -273,6 +274,8 @@ button{  outline: none;
 
   #root > div > div > div.content-container > div > div.projectData > div > form > div > div > label{width: 100px;}
 
+  #root > div > div > div.content-container > div > div.projectData > div > div:nth-child(1) > div{width: 33%; display: inline-block;}
+
 
 
 
@@ -425,3 +428,6 @@ background-color: royalblue;
   }
 
 div.sidebar-icon > span > svg{cursor: pointer;}
+
+ div.sidebar-icon > span > svg{border: 4px solid royalblue;
+  padding: 4px;}

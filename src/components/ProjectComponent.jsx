@@ -46,7 +46,9 @@ class ProjectComponent extends Component {
         axios.post(`${API_URL}/projects/getProjectsByUser`, { login: sessionStorage.getItem('authenticatedUser') })
             .then(res => {
                 this.setState({ sta5rProjects: res.data });
+                if($('#projectInputFilter').val !== ''){
                 this.setState({ allProjects: res.data });
+            }
             })
     }
     togglePopup() {
@@ -151,8 +153,10 @@ class ProjectComponent extends Component {
     deleteProject(uuid) {
         const projects = this.state.sta5rProjects.filter(project => project.uuid !== uuid);
         this.setState({ sta5rProjects: projects });
+
         axios.post(`${API_URL}/projects/deleteProject`, { uuid: uuid })
             .then(res => {
+                this.getAllUserProjects();
             })
     }
 
