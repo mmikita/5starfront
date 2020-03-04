@@ -23,9 +23,10 @@ class StatusComponent extends Component {
         <div id={this.props.status.uuid} key={this.props.status.name} className={(this.props.status.finish ? 'toDoLiDone' : this.props.status.skipped ? 'toDoLiSkipped' : 'toDoLi')}>
         <div className="statusWrapper">
         <div className="changeStatusWrapper">
-         <div>
-          <span>numer: </span><span> {this.props.status.orderPlace}</span>
-          <span> pominiety</span><span> {this.props.status.skipped.toString()}</span>
+         <div> <p> 
+          <span>Status: </span><span> {this.props.status.name}</span> </p>
+          <p> {this.props.status.statusNote}</p>
+
           </div>
           {this.props.status.finish ? (
             <div>
@@ -40,13 +41,14 @@ class StatusComponent extends Component {
             </div>
             <div>
 
-<button onClick={() => this.props.deleteStatus(this.props.status.uuid)}>usuń</button>
+<button className="deleteStatusButton" onClick={() => this.props.deleteStatus(this.props.status.uuid)}>usuń</button>
             </div>
             </div>
             <div className="statusNore">
-<textarea></textarea>
+
 
             </div>
+            
         </div>
       </div>
     )
