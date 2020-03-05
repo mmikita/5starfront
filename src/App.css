@@ -103,8 +103,9 @@ div.sidebar-icon{
 
 
 .changeStatusWrapper{
-float: left;
-width: 80%;
+display: flex;
+  float: left;
+width: 100%;
 
 }
 .statusWrapper{display: flow-root;}
@@ -275,7 +276,6 @@ button{  outline: none;
 
   #root > div > div > div.content-container > div > div.projectData > div > form > div > div > label{width: 100px;}
 
-  #root > div > div > div.content-container > div > div.projectData > div > div:nth-child(1) > div{width: 33%; display: inline-block;}
 
 
 
@@ -454,7 +454,7 @@ div.saveEditbutton{margin: 5px;}
   }
   #save:hover{cursor: pointer;}
 
-  div.changeStatusWrapper > div:nth-child(2) > button, .deleteStatusButton{
+  div.changeStatusWrapper > div > div > button, .deleteStatusButton{
     margin: 5px;
     overflow: hidden;
     position: relative;
@@ -468,7 +468,7 @@ div.saveEditbutton{margin: 5px;}
     color: white;
     background: green;
     transition: all 0.2s ease-out 0s;}
-    div.changeStatusWrapper > div:nth-child(2) > button:hover, .deleteStatusButton:hover{
+    div.changeStatusWrapper > div > div > button:hover, .deleteStatusButton:hover{
       background: #000;
     cursor: pointer;}
 
@@ -476,4 +476,10 @@ div.saveEditbutton{margin: 5px;}
  
     div.changeStatusWrapper > div:nth-child(2) > button:hover{cursor: pointer;}
 
-    div.changeStatusWrapper >div> p {display: inline-block; margin-right: 8px; padding: 5px;}
+
+
+div.sidebar > div > div > div{margin: 5px;}
+
+div.changeStatusWrapper > div{ flex-grow: 1;   flex-basis: 100%; display: flex;
+  align-items: center;
+  justify-content: center;}
