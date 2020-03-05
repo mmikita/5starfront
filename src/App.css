@@ -180,7 +180,7 @@ body {
 
 header{
   display: flex;  
-  width: 100%;
+
   background:rgba(58,63,68,0.5);
   align-items:center;
   padding: 5px;
@@ -275,6 +275,13 @@ button{  outline: none;
   .deleteButton:hover{ background: #000;}
 
   #root > div > div > div.content-container > div > div.projectData > div > form > div > div > label{width: 100px;}
+  .projectData >div>div{display: flex;}
+  .projectData >div>div>div{  
+ 
+  flex-grow: 1;
+  }
+
+
 
 
 
@@ -453,6 +460,7 @@ div.saveEditbutton{margin: 5px;}
   transition: all 0.2s ease-out 0s;
   }
   #save:hover{cursor: pointer;}
+  #addStatus{background-color: gray;}
 
   div.changeStatusWrapper > div > div > button, .deleteStatusButton{
     margin: 5px;
@@ -471,15 +479,27 @@ div.saveEditbutton{margin: 5px;}
     div.changeStatusWrapper > div > div > button:hover, .deleteStatusButton:hover{
       background: #000;
     cursor: pointer;}
-
-
- 
-    div.changeStatusWrapper > div:nth-child(2) > button:hover{cursor: pointer;}
-
-
-
+div.changeStatusWrapper > div:nth-child(2) > button:hover{cursor: pointer;}
 div.sidebar > div > div > div{margin: 5px;}
-
 div.changeStatusWrapper > div{ flex-grow: 1;   flex-basis: 100%; display: flex;
   align-items: center;
   justify-content: center;}
+  .statusDesc{ display: flex; border-bottom:  8px solid royalblue; font-size: 20px;}
+  .statusDesc>div{flex-grow: 1;   flex-basis: 100%; display: flex;
+    align-items: center;
+    justify-content: center;}
+@media(max-width: 720px){
+header{width: 730px;}
+}
+
+div.projectData > div > div:nth-child(1) > div:nth-child(1) > div > label{white-space: pre;}
+
+.userNote{}
+.userNote>textarea{width: 90%;
+ min-height: 80px;
+display: none;
+}
+
+.arrowDown > div{padding: 5px !important;}
+.arrowDown > div>svg{height: 40px !important;}
+

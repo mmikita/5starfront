@@ -69,7 +69,7 @@ class ProjectComponent extends Component {
                 $('#URL').prop("disabled", true);
                 $('#contractId').prop("disabled", true);
                 $('#save').text('Edytuj');
-                $("#statuesList").removeClass("disableStatues");
+               
             })
     }
     changeStatus = (uuid, finish, skipped) => {

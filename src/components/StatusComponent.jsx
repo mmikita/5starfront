@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import UseAnimations from 'react-useanimations';
 
 
 class StatusComponent extends Component {
@@ -19,39 +20,46 @@ class StatusComponent extends Component {
   }
   render() {
     return (
-      <div className="statusWrapper">
-        <div id={this.props.status.uuid} key={this.props.status.name} className={(this.props.status.finish ? 'toDoLiDone' : this.props.status.skipped ? 'toDoLiSkipped' : 'toDoLi')}>
+      <div>
         <div className="statusWrapper">
-        <div className="changeStatusWrapper">
-          <div><span> {this.props.status.orderPlace}</span></div>
-         <div className="statusName">
-            <p> 
-          <span></span><span> {this.props.status.name}</span> </p>
-         
-
-          </div>
-          <div className="statusNote"> <p> {this.props.status.statusNote}</p></div>
-          <div> 
-          {this.props.status.finish ? (
-            <div>
-              <button onClick={() => this.props.changeStatus(this.props.status.uuid, false, false)}>niezrobione</button>
-            </div>
-          ) : (
-              <div>
-                <button onClick={() => this.props.changeStatus(this.props.status.uuid, true, false)}>zrobione</button>
-                {this.props.status.skipped === false ? (<button onClick={() => this.props.changeStatus(this.props.status.uuid, false, true)}>pomiń</button>) : (<button onClick={() => this.props.changeStatus(this.props.status.uuid, false, false)}>do zrobienia</button>)}
+          <div id={this.props.status.uuid} key={this.props.status.name} className={(this.props.status.finish ? 'toDoLiDone' : this.props.status.skipped ? 'toDoLiSkipped' : 'toDoLi')}>
+            <div className="statusWrapper">
+              <div className="changeStatusWrapper">
+                <div><span> {this.props.status.orderPlace}</span></div>
+                <div>
+                  {this.props.status.finish ? (
+                    <p>Zrobione</p>
+                  ) : (
+                      <span>
+                        {this.props.status.skipped === false ? (<p>Niezrobione</p>) : (<p>Pominięte</p>)}
+                      </span>
+                    )}
+                </div>
+                <div className="statusName">
+                  <p>
+                    <span></span><span> {this.props.status.name}</span> </p>
+                </div>
+                <div className="statusNote"> <p> {this.props.status.statusNote}</p></div>
+                <div>
+                  {this.props.status.finish ? (
+                    <div>
+                      <button onClick={() => this.props.changeStatus(this.props.status.uuid, false, false)}>niezrobione</button>
+                    </div>
+                  ) : (
+                      <div>
+                        <button onClick={() => this.props.changeStatus(this.props.status.uuid, true, false)}>zrobione</button>
+                        {this.props.status.skipped === false ? (<button onClick={() => this.props.changeStatus(this.props.status.uuid, false, true)}>pomiń</button>) : (<button onClick={() => this.props.changeStatus(this.props.status.uuid, false, false)}>do zrobienia</button>)}
+                      </div>
+                    )}</div>
+                <div>
+                  <button className="deleteStatusButton" onClick={() => this.props.deleteStatus(this.props.status.uuid)}>usuń</button>
+                </div>
+                <div className="arrowDown"> <UseAnimations animationKey="star" size={56} style={{ padding: 100 }} /></div>
               </div>
-            )}</div>
-                        <div>
-
-<button className="deleteStatusButton" onClick={() => this.props.deleteStatus(this.props.status.uuid)}>usuń</button>
             </div>
-            </div>
-
-            </div>
-   
-            
-        </div>
+          </div>
+          <div className="userNote"><textarea></textarea></div>
+          </div>
       </div>
     )
   }

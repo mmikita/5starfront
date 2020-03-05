@@ -36,9 +36,18 @@ export default class Content extends Component {
       
       <div className="project">
         {projectName}
-        <div id="statuesList" className="disableStatues">
+        <div id="statuesList">
           <SortableStatuesContainer axis='y' revert='true' scroll='false' placeholder="sortable-placeholder" cursor="move"
             onSortEnd={this.props.onSortEnd}>
+ <div className="statusDesc">
+<div>lp.</div>
+<div>status</div>
+<div>Nazwa</div>
+<div>Opis</div>
+<div>Zmień status</div>
+<div>Usuń</div>
+<div>Notatka</div>
+</div>
             {this.props.start5 !== undefined ? this.props.start5.map((status) =>
               <SortableStatus
                 key={status.orderPlace}
@@ -51,9 +60,10 @@ export default class Content extends Component {
             
             ):('')}
           </SortableStatuesContainer>
-      
+         
+
         </div>
-        <AddStatus addStatus={this.props.addStatus} /> 
+       <div id="addStatus"> <AddStatus addStatus={this.props.addStatus} />  </div>
       </div>
     </div>
             )
@@ -118,6 +128,9 @@ function updateInputValue(saveProject) {
     $('#contractId').prop("disabled", true);
     $('#save').text('Edytuj');
     $("#statuesList").removeClass("disableStatues");
+    $("#addStatus").removeClass("disableStatues");
+
+    
     saveProject($('#name').val(), $('#contractId').val(), $('#URL').val());
   }
   else {
@@ -126,6 +139,7 @@ function updateInputValue(saveProject) {
     $('#URL').prop("disabled", false);
     $('#contractId').prop("disabled", false)
     $("#statuesList").addClass("disableStatues");
+    $("#addStatus").addClass("disableStatues");
   }
 }
 
