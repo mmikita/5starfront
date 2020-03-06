@@ -5,7 +5,8 @@ import { sortableContainer, sortableElement } from 'react-sortable-hoc';
 
 const SortableStatuesContainer = sortableContainer(({ children }) => <div className="statues">{children}</div>);
 
-const SortableStatus = sortableElement(({ status, changeStatus, deleteStatus, index }) => <StatusComponent index={index} key={status.orderPlace} status={status} changeStatus={changeStatus}  deleteStatus={deleteStatus}/>);
+const SortableStatus = sortableElement(({ status, changeStatus, deleteStatus, index,  showHideUserNote, updateUserNote}) => <StatusComponent index={index} key={status.orderPlace} status={status}
+ changeStatus={changeStatus}  deleteStatus={deleteStatus} showHideUserNote={showHideUserNote} updateUserNote={updateUserNote} />);
 
 export default class Content extends Component {
   constructor(props) {
@@ -17,6 +18,8 @@ export default class Content extends Component {
       contractId: "",
       saveProject: props.saveProject,
     }
+  
+
   }
 
   handleChange(event) {
@@ -27,6 +30,8 @@ export default class Content extends Component {
       }
     )
   }
+
+
   render() {
     let projectName;
   
@@ -56,6 +61,11 @@ export default class Content extends Component {
                 StatusComponent={status}
                 changeStatus={this.props.changeStatus}
                 deleteStatus={this.props.deleteStatus}
+                showHideUserNote={this.props.showHideUserNote}
+                updateUserNote={this.props.updateUserNote}
+
+
+                
               />
             
             ):('')}

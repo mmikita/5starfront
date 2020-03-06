@@ -39,6 +39,10 @@ class ProjectComponent extends Component {
         this.deleteStatus = this.deleteStatus.bind(this)
         this.togglePopup = this.togglePopup.bind(this)
         this.filterProjects = this.filterProjects.bind(this)
+        this.showHideUserNote = this.showHideUserNote.bind(this)
+        this.updateUserNote = this.updateUserNote.bind(this)
+
+        
 
         
     }
@@ -71,6 +75,19 @@ class ProjectComponent extends Component {
                 $('#save').text('Edytuj');
                
             })
+    }
+    showHideUserNote(uuid) {
+        if($('#note'+uuid).is(":hidden")){ 
+        $('#note'+uuid).show();
+    }
+        else{
+        $('#note'+uuid).hide();
+    }
+    
+    }
+
+    updateUserNote(uuid) {
+   console("noi jestem " + uuid);
     }
     changeStatus = (uuid, finish, skipped) => {
         const index = this.getIndex(uuid, this.state.star5ProjectStatues, "uuid");
@@ -224,7 +241,10 @@ class ProjectComponent extends Component {
                             <Sidebar  selectedProject={this.state.uuid} filterProjects={this.filterProjects} projects={this.state.sta5rProjects} changeProject={this.changeProject} deleteProject={this.deleteProject} />
                         </div>
                     </div>
-                    <Content start5={this.state.star5ProjectStatues} logo={this.state.logoImage} saveProject={this.createOrEditProject} changeStatus={this.changeStatus} onSortEnd={this.onSortEnd} addStatus={this.addStatus} deleteStatus={this.deleteStatus} />
+                    <Content start5={this.state.star5ProjectStatues} logo={this.state.logoImage} saveProject={this.createOrEditProject}
+                     changeStatus={this.changeStatus} onSortEnd={this.onSortEnd} addStatus={this.addStatus} deleteStatus={this.deleteStatus}
+                     showHideUserNote={this.showHideUserNote} updateUserNote={this.updateUserNote}
+                     />
                 </div>
             </React.Fragment>
         )

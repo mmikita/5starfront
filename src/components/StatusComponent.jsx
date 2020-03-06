@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import UseAnimations from 'react-useanimations';
+
 
 
 class StatusComponent extends Component {
@@ -54,11 +54,18 @@ class StatusComponent extends Component {
                 <div>
                   <button className="deleteStatusButton" onClick={() => this.props.deleteStatus(this.props.status.uuid)}>usuń</button>
                 </div>
-                <div className="arrowDown"> <UseAnimations animationKey="star" size={56} style={{ padding: 100 }} /></div>
+
+                <div>
+                <button onClick={() => this.props.showHideUserNote(this.props.status.uuid)}></button>
+                </div>
+
+                 
+                 
+             
               </div>
             </div>
           </div>
-          <div className="userNote"><textarea></textarea></div>
+          <div  id={'note'+this.props.status.uuid} style={{display: "none"}}   className="userNote"><textarea  defaultValue={this.props.status.name} ></textarea></div>
           </div>
       </div>
     )

@@ -497,9 +497,10 @@ div.projectData > div > div:nth-child(1) > div:nth-child(1) > div > label{white-
 .userNote{}
 .userNote>textarea{width: 90%;
  min-height: 80px;
-display: none;
+
 }
 
-.arrowDown > div{padding: 5px !important;}
+
+.arrowDown > div{padding: 5px !important; }
 .arrowDown > div>svg{height: 40px !important;}
 
