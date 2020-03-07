@@ -42,10 +42,6 @@ class ProjectComponent extends Component {
         this.showHideUserNote = this.showHideUserNote.bind(this)
         this.updateUserNote = this.updateUserNote.bind(this)
         this.updateUserNotes = this.updateUserNotes.bind(this)
-
-        
-
-        
     }
     getAllUserProjects() {
         axios.post(`${API_URL}/projects/getProjectsByUser`, { login: sessionStorage.getItem('authenticatedUser') })
@@ -75,26 +71,24 @@ class ProjectComponent extends Component {
                 $('#contractId').prop("disabled", true);
                 $('#save').text('Edytuj');
                 this.updateUserNotes();
-
-               
             })
-
     }
-
-  
     showHideUserNote(uuid) {
         if($('#note'+uuid).is(":hidden")){ 
         $('#note'+uuid).show();
     }
         else{
         $('#note'+uuid).hide();
-    }
-    
-    }
+    }  }
 
-    updateUserNote(uuid) {
+    updateUserNote(uuid, value) {
+
+      //  axios.post(`${API_URL}/projects/updateStatusUserNote`, { uuid: uuid, userNote: finish })
+   //     .then(res => {
+
+   //     })
       
-   console.log("noi jestem " + uuid);
+   console.log("noi jestem " + value);
     }
 
 
@@ -182,7 +176,6 @@ class ProjectComponent extends Component {
             $('#name').val("");
             $('#URL').val("");
             $('#contractId').val("");
-
         })
     }
 
@@ -207,15 +200,11 @@ class ProjectComponent extends Component {
                 this.setState({ star5ProjectStatues: statues });
             })
     }
-
     filterProjects() {
         var allProjects = this.state.allProjects.filter(project => project.name.includes($('#projectInputFilter').val()))
         this.setState({ sta5rProjects: allProjects });
-
     }
-
     onSortEnd = ({ oldIndex, newIndex }) => {
-        console.log("oldindex  " + oldIndex + " newIndex: " + newIndex);
         this.setState({ star5ProjectStatues: arrayMove(this.state.star5ProjectStatues, oldIndex, newIndex) })
         this.forceUpdate();
         var statues = this.state.star5ProjectStatues;
@@ -224,6 +213,7 @@ class ProjectComponent extends Component {
         }
         axios.post(`${API_URL}/projects/updateOrderPlaces`, statues)
             .then(res => {
+                this.updateUserNotes();
             })
         this.setState({ star5ProjectStatues: statues });
     };

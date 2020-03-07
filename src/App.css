@@ -462,7 +462,7 @@ div.saveEditbutton{margin: 5px;}
   #save:hover{cursor: pointer;}
   #addStatus{background-color: gray;}
 
-  div.changeStatusWrapper > div > div > button, .deleteStatusButton{
+  div.changeStatusWrapper > div > div > button, .deleteStatusButton, .showHideUserNote{
     margin: 5px;
     overflow: hidden;
     position: relative;
@@ -476,7 +476,7 @@ div.saveEditbutton{margin: 5px;}
     color: white;
     background: green;
     transition: all 0.2s ease-out 0s;}
-    div.changeStatusWrapper > div > div > button:hover, .deleteStatusButton:hover{
+    div.changeStatusWrapper > div > div > button:hover, .deleteStatusButton:hover, .showHideUserNote:hover{
       background: #000;
     cursor: pointer;}
 div.changeStatusWrapper > div:nth-child(2) > button:hover{cursor: pointer;}

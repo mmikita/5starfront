@@ -6,17 +6,15 @@ class StatusComponent extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      projectsLoaded: this.props.status.name
+      projectsLoaded: this.props.status.name,
+      value: ''
     }
     this.handleChange = this.handleChange.bind(this)
 
   }
-  onChange(e) {
-    this.setState({[e.target.name]: e.target.value})
-
-    this.setState({ projectsLoaded: e.target.value });
-
-}
+  onChange = e => {
+    this.props.updateUserNote(this.props.status.uuid, e.target.value);
+  };
 
   handleChange(event) {
     this.setState(
@@ -64,18 +62,14 @@ class StatusComponent extends Component {
                 </div>
 
                 <div>
-                <button onClick={() => this.props.showHideUserNote(this.props.status.uuid)}></button>
+                <button className="showHideUserNote" onClick={() => this.props.showHideUserNote(this.props.status.uuid)}>pokaż/ukryj</button>
                 </div>
-
-                 
-                 
-             
               </div>
             </div>
           </div>
           <div  id={'note'+this.props.status.uuid} style={{display: "none"}}   
-          className="userNote"><textarea name="userNote" value={this.state.projectsLoaded} 
-          onChange={(value) => this.onChange(value)} ></textarea></div>
+          className="userNote"><textarea name="userNote" defaultValue={this.state.projectsLoaded} 
+          onChange={this.onChange} ></textarea></div>
 
 
 
