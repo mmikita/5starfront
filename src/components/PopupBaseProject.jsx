@@ -12,13 +12,12 @@ const API_URL = global.apiUrl;
 
 const SortableStatuesContainer = sortableContainer(({ children }) => <div className="statues">{children}</div>);
 
-const SortableStatus = sortableElement(({ status, changeStatus, deleteStatus, index }) => 
+const SortableStatus = sortableElement(({ status, changeStatus, deleteStatus, index, showHideUserNote, updateUserNote }) => 
 <StatusComponent index={index} key={status.orderPlace}
-status={status} changeStatus={changeStatus}  deleteStatus={deleteStatus}/>);
-
+status={status} changeStatus={changeStatus}  deleteStatus={deleteStatus} showHideUserNote={showHideUserNote} 
+updateUserNote={updateUserNote}/>);
 
 class Popup extends React.Component {  
-
   constructor(props) {
     super(props)
     this.state = {
@@ -33,14 +32,47 @@ class Popup extends React.Component {
     this.addStatus = this.addStatus.bind(this)
     this.deleteStatus = this.deleteStatus.bind(this)
     this.getIndex = this.getIndex.bind(this)
+    this.showHideUserNote = this.showHideUserNote.bind(this)
+    this.updateUserNote = this.updateUserNote.bind(this)
+    this.updateUserNotes = this.updateUserNotes.bind(this)
 
 
 }
+
+
+showHideUserNote(uuid) {
+  if($('#note'+uuid).is(":hidden")){ 
+  $('#note'+uuid).show();
+}
+  else{
+  $('#note'+uuid).hide();
+}  }
+
+updateUserNote(uuid, value) {
+  axios.post(`${API_URL}/projects/updateStatusUserNote`, { uuid: uuid, userNote: value })
+ .then(res => {
+  })
+}
+
+
+updateUserNotes(){
+
+  var statues = this.state.star5ProjectStatues;
+  var self = this;
+//  console.log(statues)
+  $('#statuesList  div.statues > div:not(:last)').each(function(index, value) {
+var statusIndex = self.getIndex(value.firstChild.firstChild.id, statues, "uuid")
+      var noteValue = statues[statusIndex].userNote;
+      $(value.firstChild.lastChild.firstChild).val(noteValue);
+    });
+}
+
   getBaseProjectByUserName() {
     axios.post(`${API_URL}/projects/getBaseProject`, { username: sessionStorage.getItem('authenticatedUser') })
         .then(res => {
           this.setState({ star5ProjectStatues: res.data.statues });
           this.setState({ uuid: res.data.uuid });
+          this.updateUserNotes();
         })
 }
 
@@ -127,14 +159,16 @@ return (
                 StatusComponent={status}
                 changeStatus={this.changeStatus}
                 deleteStatus={this.deleteStatus}
+                showHideUserNote={this.showHideUserNote}
+                updateUserNote={this.updateUserNote}
               />
             
             ):('')}
           </SortableStatuesContainer>
-           <AddStatus addStatus={this.addStatus} /> 
+        
         </div>
 
-
+      <div> <AddStatus addStatus={this.addStatus} /> </div> 
 <button onClick={this.props.closePopup}>Zamknij</button>  
 </div>  
 </div>  

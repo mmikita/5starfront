@@ -84,7 +84,6 @@ class ProjectComponent extends Component {
     updateUserNote(uuid, value) {
         axios.post(`${API_URL}/projects/updateStatusUserNote`, { uuid: uuid, userNote: value })
        .then(res => {
-        console.log("noi jestem ");
         })
     }
 
@@ -227,8 +226,11 @@ class ProjectComponent extends Component {
                     <div className="baseProject">
                         {this.state.showPopup ?
                             <Popup
-                                text='Kliknij aby zamknąć'
-                                closePopup={this.togglePopup.bind(this)}
+                                text='Projekt bazowy'
+                                closePopup={this.togglePopup.bind(this) }
+                                showHideUserNote={this.showHideUserNote}
+                                updateUserNote={this.updateUserNote}
+                                updateUserNotes={this.updateUserNotes}
                             />
                             : null
                         }<div onClick={this.togglePopup.bind(this)}>

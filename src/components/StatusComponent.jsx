@@ -19,14 +19,11 @@ class StatusComponent extends Component {
     clearTimeout(this.state.typingTimer);
     this.setState({ value: $('#note'+this.props.status.uuid+'>textarea').val()});
     this.setState({ uuid: this.props.status.uuid});
-
     this.setState({ typingTimer: setTimeout(this.doneTyping, this.state.doneTypingInterval) });
   }
 
    doneTyping () {
     console.log(this.state.typingTimer);
-
-    // var input = $('#note'+this.props.status.uuid+'>textarea');
     this.props.updateUserNote(this.state.uuid, this.state.value);
   }
   handleChange(event) {
@@ -73,7 +70,6 @@ class StatusComponent extends Component {
                 <div>
                   <button className="deleteStatusButton" onClick={() => this.props.deleteStatus(this.props.status.uuid)}>usuń</button>
                 </div>
-
                 <div>
                 <button className="showHideUserNote" onClick={() => this.props.showHideUserNote(this.props.status.uuid)}>pokaż/ukryj</button>
                 </div>
@@ -81,7 +77,7 @@ class StatusComponent extends Component {
             </div>
           </div>
           <div  id={'note'+this.props.status.uuid} style={{display: "none"}}   
-          className="userNote"><textarea  onKeyUp={this.onKeyUp} name="userNote" defaultValue={this.state.projectsLoaded} 
+          className="userNote"><textarea  onKeyUp={this.onKeyUp} name="userNote" 
            ></textarea></div>
           </div>
 
