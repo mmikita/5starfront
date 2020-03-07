@@ -462,7 +462,7 @@ div.saveEditbutton{margin: 5px;}
   #save:hover{cursor: pointer;}
   #addStatus{background-color: gray;}
 
-  div.changeStatusWrapper > div > div > button, .deleteStatusButton, .showHideUserNote{
+  div.changeStatusWrapper > div > div > button, .deleteStatusButton, .showHideUserNote, button#addStatus{
     margin: 5px;
     overflow: hidden;
     position: relative;
@@ -476,7 +476,7 @@ div.saveEditbutton{margin: 5px;}
     color: white;
     background: green;
     transition: all 0.2s ease-out 0s;}
-    div.changeStatusWrapper > div > div > button:hover, .deleteStatusButton:hover, .showHideUserNote:hover{
+    div.changeStatusWrapper > div > div > button:hover, .deleteStatusButton:hover, .showHideUserNote:hover, button#addStatus:hover{
       background: #000;
     cursor: pointer;}
 div.changeStatusWrapper > div:nth-child(2) > button:hover{cursor: pointer;}
@@ -497,10 +497,16 @@ div.projectData > div > div:nth-child(1) > div:nth-child(1) > div > label{white-
 .userNote{}
 .userNote>textarea{width: 90%;
  min-height: 80px;
-
 }
-
-
 .arrowDown > div{padding: 5px !important; }
 .arrowDown > div>svg{height: 40px !important;}
+
+.addStatusDataWrapper{display: flex;}
+.addStatusDataWrapper>div{display: grid; flex-grow: 1;}
+.addStatusDataWrapper input{width: 50%;
+  margin: 0 auto;}
+
+button#addStatus{margin: 0 auto;}
+
+header{padding-top: 4px;}
 
