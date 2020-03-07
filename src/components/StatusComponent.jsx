@@ -1,20 +1,36 @@
 import React, { Component } from 'react'
-
+import $ from 'jquery';
 
 class StatusComponent extends Component {
-
   constructor(props) {
     super(props)
     this.state = {
       projectsLoaded: this.props.status.name,
-      value: ''
+      value: '',
+      typingTimer: 0,
+      doneTypingInterval: 3000
     }
     this.handleChange = this.handleChange.bind(this)
-
+    this.onKeyDown = this.onKeyDown.bind(this)
+    this.onKeyUp = this.onKeyUp.bind(this)
+    this.doneTyping = this.doneTyping.bind(this)
   }
-  onChange = e => {
-    this.props.updateUserNote(this.props.status.uuid, e.target.value);
-  };
+  onKeyDown() {
+    
+    clearTimeout(this.state.typingTimer);
+  }
+  onKeyUp() {
+    clearTimeout(this.state.typingTimer);
+    this.setState({ typingTimer: setTimeout(this.doneTyping, this.state.doneTypingInterval) });
+  }
+
+
+   doneTyping () {
+    console.log(this.state.typingTimer);
+
+     var input = $('#note'+this.props.status.uuid+'>textarea');
+    this.props.updateUserNote(this.props.status.uuid, input.val());
+  }
 
   handleChange(event) {
     this.setState(
@@ -68,8 +84,8 @@ class StatusComponent extends Component {
             </div>
           </div>
           <div  id={'note'+this.props.status.uuid} style={{display: "none"}}   
-          className="userNote"><textarea name="userNote" defaultValue={this.state.projectsLoaded} 
-          onChange={this.onChange} ></textarea></div>
+          className="userNote"><textarea onKeyDown={this.onKeyDown} onKeyUp={this.onKeyUp} name="userNote" defaultValue={this.state.projectsLoaded} 
+           ></textarea></div>
 
 
 

@@ -87,8 +87,10 @@ class ProjectComponent extends Component {
    //     .then(res => {
 
    //     })
-      
-   console.log("noi jestem " + value);
+
+
+    console.log("noi jestem " + value);
+
     }
 
 
