@@ -8,30 +8,27 @@ class StatusComponent extends Component {
       projectsLoaded: this.props.status.name,
       value: '',
       typingTimer: 0,
-      doneTypingInterval: 3000
+      doneTypingInterval: 2000,
+      uuid: ''
     }
     this.handleChange = this.handleChange.bind(this)
-    this.onKeyDown = this.onKeyDown.bind(this)
     this.onKeyUp = this.onKeyUp.bind(this)
     this.doneTyping = this.doneTyping.bind(this)
-  }
-  onKeyDown() {
-    
-    clearTimeout(this.state.typingTimer);
-  }
+  }  
   onKeyUp() {
     clearTimeout(this.state.typingTimer);
+    this.setState({ value: $('#note'+this.props.status.uuid+'>textarea').val()});
+    this.setState({ uuid: this.props.status.uuid});
+
     this.setState({ typingTimer: setTimeout(this.doneTyping, this.state.doneTypingInterval) });
   }
-
 
    doneTyping () {
     console.log(this.state.typingTimer);
 
-     var input = $('#note'+this.props.status.uuid+'>textarea');
-    this.props.updateUserNote(this.props.status.uuid, input.val());
+    // var input = $('#note'+this.props.status.uuid+'>textarea');
+    this.props.updateUserNote(this.state.uuid, this.state.value);
   }
-
   handleChange(event) {
     this.setState(
       {
@@ -84,18 +81,12 @@ class StatusComponent extends Component {
             </div>
           </div>
           <div  id={'note'+this.props.status.uuid} style={{display: "none"}}   
-          className="userNote"><textarea onKeyDown={this.onKeyDown} onKeyUp={this.onKeyUp} name="userNote" defaultValue={this.state.projectsLoaded} 
+          className="userNote"><textarea  onKeyUp={this.onKeyUp} name="userNote" defaultValue={this.state.projectsLoaded} 
            ></textarea></div>
-
-
-
           </div>
 
       </div>
     )
   }
 }
-
-
-
 export default StatusComponent

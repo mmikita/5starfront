@@ -82,15 +82,10 @@ class ProjectComponent extends Component {
     }  }
 
     updateUserNote(uuid, value) {
-
-      //  axios.post(`${API_URL}/projects/updateStatusUserNote`, { uuid: uuid, userNote: finish })
-   //     .then(res => {
-
-   //     })
-
-
-    console.log("noi jestem " + value);
-
+        axios.post(`${API_URL}/projects/updateStatusUserNote`, { uuid: uuid, userNote: value })
+       .then(res => {
+        console.log("noi jestem ");
+        })
     }
 
 
@@ -98,7 +93,7 @@ class ProjectComponent extends Component {
         var statues = this.state.star5ProjectStatues;
         var self = this;
         $('#statuesList > div > div').slice(1).each(function(index, value) {
-            var noteValue = statues[self.getIndex(value.firstChild.firstChild.id, statues, "uuid")].name;
+            var noteValue = statues[self.getIndex(value.firstChild.firstChild.id, statues, "uuid")].userNote;
             $(value.firstChild.lastChild.firstChild).val(noteValue);
           });
     }
