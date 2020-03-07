@@ -93,14 +93,17 @@ class ProjectComponent extends Component {
     }
 
     updateUserNote(uuid) {
+      
    console.log("noi jestem " + uuid);
     }
+
+
     updateUserNotes(){
+        var statues = this.state.star5ProjectStatues;
+        var self = this;
         $('#statuesList > div > div').slice(1).each(function(index, value) {
-            var listItem = $(this);
-            //console.log(`div${index}: ${this.className}`);
-           // console.log("dupa" +listItem.find(">div").className);
-            console.log(value.firstChild.firstChild.id);
+            var noteValue = statues[self.getIndex(value.firstChild.firstChild.id, statues, "uuid")].name;
+            $(value.firstChild.lastChild.firstChild).val(noteValue);
           });
     }
 
