@@ -1,15 +1,23 @@
 import React, { Component } from 'react'
 
 
-
 class StatusComponent extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
+      projectsLoaded: this.props.status.name
     }
     this.handleChange = this.handleChange.bind(this)
+
   }
+  onChange(e) {
+    this.setState({[e.target.name]: e.target.value})
+
+    this.setState({ projectsLoaded: e.target.value });
+
+}
+
   handleChange(event) {
     this.setState(
       {
@@ -65,8 +73,14 @@ class StatusComponent extends Component {
               </div>
             </div>
           </div>
-          <div  id={'note'+this.props.status.uuid} style={{display: "none"}}   className="userNote"><textarea  defaultValue={this.props.status.name} ></textarea></div>
+          <div  id={'note'+this.props.status.uuid} style={{display: "none"}}   
+          className="userNote"><textarea name="userNote" value={this.state.projectsLoaded} 
+          onChange={(value) => this.onChange(value)} ></textarea></div>
+
+
+
           </div>
+
       </div>
     )
   }

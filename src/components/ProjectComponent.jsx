@@ -41,6 +41,7 @@ class ProjectComponent extends Component {
         this.filterProjects = this.filterProjects.bind(this)
         this.showHideUserNote = this.showHideUserNote.bind(this)
         this.updateUserNote = this.updateUserNote.bind(this)
+        this.updateUserNotes = this.updateUserNotes.bind(this)
 
         
 
@@ -73,9 +74,14 @@ class ProjectComponent extends Component {
                 $('#URL').prop("disabled", true);
                 $('#contractId').prop("disabled", true);
                 $('#save').text('Edytuj');
+                this.updateUserNotes();
+
                
             })
+
     }
+
+  
     showHideUserNote(uuid) {
         if($('#note'+uuid).is(":hidden")){ 
         $('#note'+uuid).show();
@@ -87,8 +93,18 @@ class ProjectComponent extends Component {
     }
 
     updateUserNote(uuid) {
-   console("noi jestem " + uuid);
+   console.log("noi jestem " + uuid);
     }
+    updateUserNotes(){
+        $('#statuesList > div > div').slice(1).each(function(index, value) {
+            var listItem = $(this);
+            //console.log(`div${index}: ${this.className}`);
+           // console.log("dupa" +listItem.find(">div").className);
+            console.log(value.firstChild.firstChild.id);
+          });
+    }
+
+
     changeStatus = (uuid, finish, skipped) => {
         const index = this.getIndex(uuid, this.state.star5ProjectStatues, "uuid");
         var statues = this.state.star5ProjectStatues;
@@ -121,9 +137,9 @@ class ProjectComponent extends Component {
                 this.setState(previousState => ({
                     star5ProjectStatues: [...previousState.star5ProjectStatues, newStatus]
                 }));
-                console.log(this.state.star5ProjectStatues);
+                this.forceUpdate();
             })
-        this.forceUpdate();
+       
     }
     createOrEditProject(name, number, url, uuid) {
         axios.post(`${API_URL}/projects/addNew5star`, {
