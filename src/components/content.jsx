@@ -38,41 +38,45 @@ export default class Content extends Component {
     projectName = <ProjectForm saveProject={this.state.saveProject} />
 
     return (<div className="content-container">
-
-      <div className="project">
-        {projectName}
-        <div id="statuesList">
-          <SortableStatuesContainer axis='y' revert='true' scroll='false' placeholder="sortable-placeholder" cursor="move"
-            onSortEnd={this.props.onSortEnd}>
-            <div className="statusDesc">
-              <div>lp.</div>
-              <div>status</div>
-              <div>Nazwa</div>
-              <div>Opis</div>
-              <div>Zmień status</div>
-              <div>Usuń</div>
-              <div>Notatka</div>
-            </div>
-            {this.props.start5 !== undefined ? this.props.start5.map((status) =>
-              <SortableStatus
-                key={status.orderPlace}
-                status={status}
-                index={status.orderPlace}
-                StatusComponent={status}
-                changeStatus={this.props.changeStatus}
-                deleteStatus={this.props.deleteStatus}
-                showHideUserNote={this.props.showHideUserNote}
-                updateUserNote={this.props.updateUserNote}
-              />
-
-            ) : ('')}
-          </SortableStatuesContainer>
-
-
-        </div>
         {$.isEmptyObject(this.props.start5) === false ?
-        <div id="addStatus"> <AddStatus addStatus={this.props.addStatus} />  </div>:('')}
-      </div>
+       
+       <div className="project">
+       {projectName}
+       <div id="statuesList">
+         <SortableStatuesContainer axis='y' revert='true' scroll='false' placeholder="sortable-placeholder" cursor="move"
+           onSortEnd={this.props.onSortEnd}>
+           <div className="statusDesc">
+             <div>lp.</div>
+             <div>status</div>
+             <div>Nazwa</div>
+             <div>Opis</div>
+             <div>Zmień status</div>
+             <div>Usuń</div>
+             <div>Notatka</div>
+           </div>
+           {this.props.start5 !== undefined ? this.props.start5.map((status) =>
+             <SortableStatus
+               key={status.orderPlace}
+               status={status}
+               index={status.orderPlace}
+               StatusComponent={status}
+               changeStatus={this.props.changeStatus}
+               deleteStatus={this.props.deleteStatus}
+               showHideUserNote={this.props.showHideUserNote}
+               updateUserNote={this.props.updateUserNote}
+             />
+
+           ) : ('')}
+         </SortableStatuesContainer>
+
+
+       </div>
+       {$.isEmptyObject(this.props.start5) === false ?
+       <div id="addStatus"> <AddStatus addStatus={this.props.addStatus} />  </div>:('')}
+     </div>
+       
+       :('')}
+ 
     </div>
     )
   }

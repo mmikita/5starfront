@@ -442,7 +442,7 @@ background-color: royalblue;
   padding: 4px;}
 
 div.saveEditbutton{margin: 5px;}
-  #save, #addStatus{
+  #save, #addStatus, #addBaseStatus{
   display: block;
   margin: 0 auto;
   overflow: hidden;
@@ -461,7 +461,7 @@ div.saveEditbutton{margin: 5px;}
   }
   #save:hover{cursor: pointer;}
   #addStatus{background-color: gray;}
-
+  
   div.changeStatusWrapper > div > div > button, .deleteStatusButton, .showHideUserNote, button#addStatus{
     margin: 5px;
     overflow: hidden;
@@ -492,6 +492,8 @@ div.changeStatusWrapper > div{ flex-grow: 1;   flex-basis: 100%; display: flex;
 header{width: 730px;}
 }
 
+div.popup  div > div > div:nth-child(2){margin: 5px;} 
+
 div.projectData > div > div:nth-child(1) > div:nth-child(1) > div > label{white-space: pre;}
 
 .userNote{}
@@ -505,6 +507,7 @@ div.projectData > div > div:nth-child(1) > div:nth-child(1) > div > label{white-
 .addStatusDataWrapper>div{display: grid; flex-grow: 1;}
 .addStatusDataWrapper input{width: 50%;
   margin: 0 auto;}
+.addBaseStatusDataWrapper{display: block;}
 
 button#addStatus{margin: 0 auto;}
 

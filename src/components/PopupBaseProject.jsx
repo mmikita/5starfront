@@ -178,16 +178,18 @@ return (
 function AddStatus(props) {
   return (
     <div className="addStatus">
-        <div>
-            <form>
+        <div className="addBaseStatusDataWrapper">
+          
               <div>
                 <div>
-                  <label htmlFor="1">Nazwa statusu</label>
-                  <input id="newBaseStatusName" name="1"  />
+                  <div>
+                  <label htmlFor="1">Nazwa statusu</label></div>
+                  <div>  <input id="newBaseStatusName" name="1"  /></div>
                 </div>
                 <div>
-                  <label htmlFor="2">Opis Statusu</label>
-                  <input id="newBaseStatusNote" name="2"  />
+                  <div>
+                  <label htmlFor="2">Opis Statusu</label></div>
+                  <div>  <input id="newBaseStatusNote" name="2"  /></div>
                 </div>
               </div>
               <div>
@@ -195,7 +197,7 @@ function AddStatus(props) {
                    props.addStatus($('#newBaseStatusName').val(), 
                    $('#newBaseStatusNote').val())}>Dodaj</button>
                    </div>
-            </form>
+          
           </div>
     </div>
   );
