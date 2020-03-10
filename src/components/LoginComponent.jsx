@@ -57,15 +57,19 @@ class LoginComponent extends Component {
                     <div>
                         {this.state.hasLoginFailed && <div className="alert alert-warning">Nieprawidłowe dane</div>}
                         {this.state.showSuccessMessage && <div>Zalogowany</div>}
+                        <form>
                         <div className="form-field">
 
                             <label className="user" htmlFor="login-username"><span className="hidden">Login</span></label>
                             <input id="login-username" type="text" className="form-input" placeholder="Login" name="username" value={this.state.username} onChange={this.handleChange} required />
                         </div>
                         <div className="form-field">
+                            
                             <label className="lock" htmlFor="login-password"><span className="hidden">Hasło</span></label>
-                            <input  id="login-password" type="password" className="form-input" placeholder="Hasło" name="password" value={this.state.password} onChange={this.handleChange} onKeyPress={this.enterPressed.bind(this)} required />
+                            <input  id="login-password"  autoComplete="off" type="password" className="form-input" placeholder="Hasło" name="password" value={this.state.password} onChange={this.handleChange} onKeyPress={this.enterPressed.bind(this)} required />
+                          
                         </div>
+                        </form>
                         <div className="row form-field loginbutton">
                             <button className="btn btn-success" onClick={this.loginClicked}>Zaloguj</button>
                         </div>

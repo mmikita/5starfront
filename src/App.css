@@ -3,24 +3,11 @@
 
 .app {
   text-align: center;
-
 }
-
-.App-logo {
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  
-  display: block;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
+#root{
+  width: 100%;
+  height: 100%;
+  }
 .loginPanel {
   background: 
 #222222;
@@ -32,21 +19,14 @@ margin: 0 auto;
 .loginPanel input {
   display: inline-block;
 }
-
-
-
-#root{
-width: 100%;
-height: 100%;
-}
 .content-container{
-  margin: 0 auto;
-  height: 100%;
   flex: auto;
 }
-.logoimgwith5star{
-  width: 20%;
-}
+
+
+
+
+
 .project{
   margin: 0 auto;
    width: 100%;

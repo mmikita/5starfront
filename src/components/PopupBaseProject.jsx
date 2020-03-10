@@ -35,9 +35,10 @@ class Popup extends React.Component {
     this.showHideUserNote = this.showHideUserNote.bind(this)
     this.updateUserNote = this.updateUserNote.bind(this)
     this.updateUserNotes = this.updateUserNotes.bind(this)
-
+    this.handleEnterKeyPress = this.handleEnterKeyPress.bind(this)
 
 }
+
 
 
 showHideUserNote(uuid) {
@@ -109,6 +110,13 @@ changeStatus = (uuid, finish, skipped) => {
       })
 }
 
+
+handleEnterKeyPress(event) {
+  var code = event.keyCode || event.which;
+  if (code === 27) { //13 is the enter keycode
+      console.log('dsds');
+  }
+}
 addStatus(name, statusNote) {
   var newStatus = {};
   newStatus.name = name;
@@ -143,6 +151,7 @@ onSortEnd = ({ oldIndex, newIndex }) => {
 };
 
 
+
   render() {  
 return (  
 <div className='popup'>  
@@ -169,7 +178,7 @@ return (
         </div>
 
       <div> <AddStatus addStatus={this.addStatus} /> </div> 
-<button onClick={this.props.closePopup}>Zamknij</button>  
+<button id="closeButton" onClick={this.props.closePopup} > Zamknij</button>  
 </div>  
 </div>  
 );  
