@@ -14,7 +14,6 @@ class LoginComponent extends Component {
             hasLoginFailed: false,
             showSuccessMessage: false
         }
-
         this.handleChange = this.handleChange.bind(this)
         this.loginClicked = this.loginClicked.bind(this)
     }
@@ -29,7 +28,6 @@ class LoginComponent extends Component {
     }
 
     loginClicked() {
-        // if(this.state.username==='in28minutes' && this.state.password==='dummy'){
         AuthenticationService.executeJwtAuthenticationService(this.state.username, this.state.password)
             .then((response) => {
                 AuthenticationService.registerSuccessfulLoginForJwt(this.state.username, response.data.token)
@@ -53,7 +51,7 @@ class LoginComponent extends Component {
             <div className="loginContainer">
 
                 <div className="loginPanel">
-                    <div className="logo">Klikaj 5stary</div>
+                    <div className="logo">Zaloguj się</div>
                     <div>
                         {this.state.hasLoginFailed && <div className="alert alert-warning">Nieprawidłowe dane</div>}
                         {this.state.showSuccessMessage && <div>Zalogowany</div>}
